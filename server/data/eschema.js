@@ -26,9 +26,9 @@ enum TipoCliente {
     PREMIUM
 }
 type Query {
-    getClientes(limite: Int): [Cliente]
+    getClientes(limite: Int, offset: Int): [Cliente]
     getCliente(id: ID) : Cliente
-
+    totalClientes: String
 }
 input PedidoInput{
     producto: String
