@@ -23,25 +23,25 @@ class NuevoCliente extends Component {
     });
   };
 
-  DelCamp= i => () => {
-  	this.setState({
-  		emails: this.state.emails.filter((email, index) => i !== index)
-  	})
+  DelCamp = i => () => {
+    this.setState({
+      emails: this.state.emails.filter((email, index) => i !== index)
+    });
   };
 
-  ReadCamp= i => e =>{
-	const NewEmail = this.state.emails.map(( email, index )=>{
-		if (i != index) return email;
-		return {
-			...email,
-			email: e.target.value
-		}
-	});
+  ReadCamp = i => e => {
+    const NewEmail = this.state.emails.map((email, index) => {
+      if (i != index) return email;
+      return {
+        ...email,
+        email: e.target.value
+      };
+    });
 
-	this.setState({
-		emails: NewEmail
-	})
-  }
+    this.setState({
+      emails: NewEmail
+    });
+  };
 
   render() {
     const { error } = this.setState;
@@ -62,13 +62,12 @@ class NuevoCliente extends Component {
           }}
         >
           {crearCliente => (
-
             <div className="justify-content-center d-flex">
               <form
                 className="col-md-8 m-3 justify-content-center"
                 onSubmit={e => {
                   e.preventDefault();
-  
+
                   const {
                     nombre,
                     apellido,
@@ -77,8 +76,8 @@ class NuevoCliente extends Component {
                     tipo
                   } = this.state.cliente;
 
-                  const {emails} = this.state;
-  
+                  const { emails } = this.state;
+
                   const input = {
                     nombre,
                     apellido,
@@ -87,7 +86,7 @@ class NuevoCliente extends Component {
                     emails,
                     tipo
                   };
-  
+
                   if (
                     nombre === "" ||
                     apellido === "" ||
@@ -103,7 +102,7 @@ class NuevoCliente extends Component {
                   this.setState({
                     error: false
                   });
-  
+
                   crearCliente({
                     variables: { input }
                   });
@@ -160,30 +159,28 @@ class NuevoCliente extends Component {
                       }}
                     />
                   </div>
-                  { this.state.emails.map((input,index)=>(
-  						<div 
-  						key={index}
-  						className="form-group col-md-12 "
-  						>
-  							<label >Correo {index + 1}: </label>
-  							<div className="input-group">
-  							  <input 
-    								type="email" 
-    								placeholder="Ingresa tu Email"
-    								className="form-control"
-    								onChange={this.ReadCamp(index)}
-    								
-    							/>
-                  <div className="input-group-append">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={this.DelCamp(index)}
-                    >&times; Eliminar </button>
-                  </div>
-  							</div>
-  						</div>
-                  	))}
+                  {this.state.emails.map((input, index) => (
+                    <div key={index} className="form-group col-md-12 ">
+                      <label>Correo {index + 1}: </label>
+                      <div className="input-group">
+                        <input
+                          type="email"
+                          placeholder="Ingresa tu Email"
+                          className="form-control"
+                          onChange={this.ReadCamp(index)}
+                        />
+                        <div className="input-group-append">
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={this.DelCamp(index)}
+                          >
+                            &times; Eliminar{" "}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                   <div className="form-group d-flex justify-content-center col-md-12">
                     <button
                       type="button"

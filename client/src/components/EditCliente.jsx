@@ -15,10 +15,9 @@ class EditCliente extends Component {
             {({ loading, error, data, refetch }) => {
               if (loading) return "Cargando...";
               if (error) return `Error: ${error.message}`;
-              return <FormEditClient
-                        client= {data.getCliente}
-                        refetch= {refetch}
-                      />;
+              return (
+                <FormEditClient client={data.getCliente} refetch={refetch} />
+              );
             }}
           </Query>
         </div>
