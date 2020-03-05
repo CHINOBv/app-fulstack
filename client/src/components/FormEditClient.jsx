@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class FormEditClient extends Component {
   state = {
-    emails: []
+    client: this.props.client,
+    emails: this.props.client.emails
   };
 
   nuevoCampo = () => {
@@ -26,6 +27,8 @@ class FormEditClient extends Component {
   };
 
   render() {
+    const { nombre, apellido, edad, empresa, tipo } = this.state.client;
+    console.log(nombre)
     const { emails } = this.state;
 
     return (
@@ -33,18 +36,46 @@ class FormEditClient extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label>Nombre</label>
-            <input type="text" className="form-control" />
+            <input  type="text" className="form-control" 
+            defaultValue={nombre}
+            onChange={e=>{  
+              this.setState({
+                client:{
+                  ...this.state.client,
+                  nombre: e.target.value
+                }
+              })
+            }}         
+            />
           </div>
           <div className="form-group col-md-6">
             <label>Apellido</label>
-            <input type="text" className="form-control" />
+            <input type="text" className="form-control" defaultValue={apellido}
+              onChange={e=>{  
+              this.setState({
+                client:{
+                  ...this.state.client,
+                  apellido: e.target.value
+                }
+              })
+            }}
+            />
           </div>
         </div>
 
         <div className="form-row">
           <div className="form-group col-md-12">
             <label>Empresa</label>
-            <input type="text" className="form-control" />
+            <input type="text" className="form-control" defaultValue={empresa}
+            onChange={e=>{  
+              this.setState({
+                client:{
+                  ...this.state.client,
+                  empresa: e.target.value
+                }
+              })
+            }}
+            />
           </div>
 
           {emails.map((input, index) => (
@@ -83,11 +114,29 @@ class FormEditClient extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label>Edad</label>
-            <input type="text" className="form-control" />
+            <input type="text" className="form-control" defaultValue={edad}
+            onChange={e=>{  
+              this.setState({
+                client:{
+                  ...this.state.client,
+                  edad: e.target.value
+                }
+              })
+            }}
+            />
           </div>
           <div className="form-group col-md-6">
             <label>Tipo Cliente</label>
-            <select className="form-control">
+            <select className="form-control" defaultValue={tipo}
+            onChange={e=>{  
+              this.setState({
+                client:{
+                  ...this.state.client,
+                  tipo: e.target.value
+                }
+              })
+            }}
+            >
               <option value="">Elegir...</option>
               <option value="PREMIUM">PREMIUM</option>
               <option value="BASICO">BÁSICO</option>

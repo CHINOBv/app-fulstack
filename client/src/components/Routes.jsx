@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "./Header.jsx";
 import Clientes from "./Clientes.jsx";
-//import EditCliente from './EditCliente.jsx';
+import EditCliente from './EditCliente.jsx';
 import NuevoCliente from "./NuevoCliente.jsx";
 
 //<Route exact path='/cliente/editar/:id' component={EditCliente}/>
@@ -17,6 +17,7 @@ class Routes extends Component {
             <Switch>
               <Route exact path="/" component={Clientes} />
               <Route exact path="/cliente/nuevo" component={NuevoCliente} />
+              <Route exact path="/cliente/editar/:id" component={EditCliente} />
             </Switch>
           </div>
         </Fragment>

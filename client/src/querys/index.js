@@ -15,7 +15,10 @@ export const CLIENTE_QUERY = gql`
     getCliente(id: $id) {
       nombre
       apellido
-
+      emails{
+        email
+      }
+      edad
       tipo
       empresa
     }

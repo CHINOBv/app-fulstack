@@ -15,8 +15,9 @@ class EditCliente extends Component {
             {({ loading, error, data }) => {
               if (loading) return "Cargando...";
               if (error) return `Error: ${error.message}`;
-              console.log(data);
-              return <FormEditClient />;
+              return <FormEditClient
+                        client= {data.getCliente}
+                      />;
             }}
           </Query>
         </div>
