@@ -23,6 +23,26 @@ class NuevoCliente extends Component {
     });
   };
 
+  DelCamp= i => () => {
+  	this.setState({
+  		emails: this.state.emails.filter((email, index) => i !== index)
+  	})
+  };
+
+  ReadCamp= i => e =>{
+	const NewEmail = this.state.emails.map(( email, index )=>{
+		if (i != index) return email;
+		return {
+			...email,
+			email: e.target.value
+		}
+	});
+
+	this.setState({
+		emails: NewEmail
+	})
+  }
+
   render() {
     const { error } = this.setState;
     let res = error ? (
@@ -54,16 +74,17 @@ class NuevoCliente extends Component {
                     apellido,
                     empresa,
                     edad,
-                    email,
                     tipo
                   } = this.state.cliente;
+
+                  const {emails} = this.state;
   
                   const input = {
                     nombre,
                     apellido,
                     empresa,
                     edad: Number(edad),
-                    email,
+                    emails,
                     tipo
                   };
   
@@ -150,11 +171,14 @@ class NuevoCliente extends Component {
     								type="email" 
     								placeholder="Ingresa tu Email"
     								className="form-control"
+    								onChange={this.ReadCamp(index)}
+    								
     							/>
                   <div className="input-group-append">
                     <button
                       type="button"
                       className="btn btn-danger"
+                      onClick={this.DelCamp(index)}
                     >&times; Eliminar </button>
                   </div>
   							</div>
