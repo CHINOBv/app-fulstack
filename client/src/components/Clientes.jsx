@@ -7,6 +7,8 @@ import Paginador from './Paginador.jsx';
 
 class Clientes extends Component{
 
+  limite = 3;
+
   state={
     paginador: {
       offset: 0,
@@ -14,16 +16,37 @@ class Clientes extends Component{
     }
   }
 
+  paginaAnt = ()=>{
+     this.setState({
+      paginador: {
+        offset: this.state.paginador.offset - this.limite,
+        actual: this.state.paginador.actual - 1
+      }
+    })
+  }
+  paginaSig = () => {
+
+    this.setState({
+      paginador: {
+        offset: this.state.paginador.offset + this.limite,
+        actual: this.state.paginador.actual + 1
+      }
+    })
+
+  }
+
   render() {
+
     return(
       //Consulting DB
-      <Query query={CLIENTES_QUERY} pollInterval={500}>
+      <Query query={CLIENTES_QUERY} pollInterval={500} variables={{ limite: this.limite, offset: this.state.paginador.offset }}>
         {({ loading, error, data, startPolling, stopPolling }) => {
           //Consulting
           if (loading) return "Carg";
           //Error Message
           if (error) return `Error: ${error.message}`;
           //Show Data'sf
+          //console.log(data.totalClientes)
           return (
             <Fragment>
               <h2 className="text-center">Listado de Clientes</h2>
@@ -66,6 +89,10 @@ class Clientes extends Component{
               </ul>
               <Paginador
                 actual={this.state.paginador.actual}
+                totalClientes={data.totalClientes}
+                limite= {this.limite}
+                paginaAnt={this.paginaAnt}
+                paginaSig={this.paginaSig}
               />
             </Fragment>
           );
