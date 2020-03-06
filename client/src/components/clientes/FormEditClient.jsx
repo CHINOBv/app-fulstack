@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
-import { ACTUALIZAR_CLIENTE } from "../mutations/index.js";
+import { ACTUALIZAR_CLIENTE } from "../../mutations/index.js";
 import { withRouter } from "react-router-dom";
 
 class FormEditClient extends Component {

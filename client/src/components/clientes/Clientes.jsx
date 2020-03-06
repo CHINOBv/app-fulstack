@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from "react";
 import { Query, Mutation } from "react-apollo";
-import { CLIENTES_QUERY } from "../querys/index.js";
+import { CLIENTES_QUERY } from "../../querys/index.js";
 import { Link } from "react-router-dom";
-import { ELIMINAR_CLIENTE } from '../mutations/index.js';
+import { ELIMINAR_CLIENTE } from '../../mutations/index.js';
 import Paginador from './Paginador.jsx';
 
 class Clientes extends Component{

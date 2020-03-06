@@ -2,9 +2,9 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "./Header.jsx";
-import Clientes from "./Clientes.jsx";
-import EditCliente from './EditCliente.jsx';
-import NuevoCliente from "./NuevoCliente.jsx";
+import Clientes from "./clientes/Clientes.jsx";
+import EditCliente from './clientes/EditCliente.jsx';
+import NuevoCliente from "./clientes/NuevoCliente.jsx";
 
 //<Route exact path='/cliente/editar/:id' component={EditCliente}/>
 class Routes extends Component {

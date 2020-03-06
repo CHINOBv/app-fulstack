@@ -27,6 +27,14 @@ export const resolvers = {
     },
     getProductos: (root, { limite, offset })=>{
       return Productos.find({}).limit(limite).skip(offset);
+    },
+    getProducto: (root, { id }) => {
+      return new Promise((resolve, object) => {
+        Productos.findById(id, (error, Producto) => {
+          if(error) rejects(error);
+          else resolve(Producto);
+        });
+      });
     }
   },
 

@@ -24,15 +24,22 @@ enum TipoCliente {
     BASICO
     PREMIUM
 }
+
+""" Producto Types """
+type getProducto {
+    nombre: String
+    precio: Int
+    stock: Int
+}
+
 type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
     getCliente(id: ID) : Cliente
     totalClientes: String
     # Producto Querys
-    getProductos: [Producto]
+    getProductos(limite: Int, offset: Int): [Producto]
+    getProducto(id:ID): Producto
 }
-
-""" Producto Types """
 
 type Producto{
     id: ID
