@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Clientes } from "./db.js";
+import { Clientes, Productos } from "./db.js";
 
 //Export Resolvs
 export const resolvers = {
@@ -24,6 +24,9 @@ export const resolvers = {
           else resolve(count)
         })
       })
+    },
+    getProductos: (root, { limite, offset })=>{
+      return Productos.find({}).limit(limite).skip(offset);
     }
   },
 
@@ -72,6 +75,23 @@ export const resolvers = {
           else resolve("Se Elimino el Cliente");
         });
       });
+    },
+    nuevoProducto: (root,{ input }) => {
+      const nuevoProducto = new Productos({
+        nombre: input.nombre,
+        precio: input.precio,
+        stock: input.stock
+      });
+      
+      nuevoProducto.id = nuevoProducto._id;
+
+      return new Promise((resolve, object) => {
+        nuevoProducto.save((error) => {
+          if(error) rejects(error);
+          else resolve(nuevoProducto);
+        });
+      });
+
     }
   }
 };

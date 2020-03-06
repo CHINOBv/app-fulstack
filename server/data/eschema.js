@@ -1,6 +1,7 @@
 import { importSchema } from "graphql-import";
 
 const typeDefs = `
+""" Clientes Querys """
 type Cliente {
     id: ID
     nombre: String
@@ -18,9 +19,7 @@ type Pedido {
 type Email {
     email: String
 }
-input EmailInput {
-    email: String
-}
+
 enum TipoCliente {
     BASICO
     PREMIUM
@@ -29,6 +28,22 @@ type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
     getCliente(id: ID) : Cliente
     totalClientes: String
+    # Producto Querys
+    getProductos: [Producto]
+}
+
+""" Producto Types """
+
+type Producto{
+    id: ID
+    nombre: String!
+    precio: Int!
+    stock: Int!
+}
+
+""" Clientes Inputs """
+input EmailInput {
+    email: String
 }
 input PedidoInput{
     producto: String
@@ -44,10 +59,22 @@ input ClienteInput{
     tipo: TipoCliente
     pedidos: [PedidoInput]
 }
+
+"""Producto Input"""
+input ProductoInput{
+    id: ID
+    nombre: String!
+    precio: Int!
+    stock: Int!
+}
+
 type Mutation {
+    # Mutations Client
  crearCliente(input: ClienteInput)  : Cliente
  actualizarCliente(input: ClienteInput)  : Cliente
  eliminarCliente(id: ID!) : String
+    # Mutations Producto
+nuevoProducto(input: ProductoInput): Producto
 }
 `;
 
