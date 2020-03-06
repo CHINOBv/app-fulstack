@@ -99,7 +99,22 @@ export const resolvers = {
           else resolve(nuevoProducto);
         });
       });
-
+    },
+    actualizarProducto: (root, { input }) =>{
+      return new Promise( ( resolve, Producto ) => {
+        Productos.findOneAndUpdate(
+          {_id: input.id},
+          input,
+          {new: true},
+          (error, Producto) =>{
+            if (error) {
+              rejects(error);
+            }else {
+              resolve(Producto);
+            }
+          }
+          );
+      });
     }
   }
 };

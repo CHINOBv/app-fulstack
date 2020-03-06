@@ -82,6 +82,7 @@ type Mutation {
  eliminarCliente(id: ID!) : String
     # Mutations Producto
 nuevoProducto(input: ProductoInput): Producto
+actualizarProducto(input: ProductoInput): Producto
 }
 `;
 
