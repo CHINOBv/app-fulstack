@@ -83,6 +83,7 @@ type Mutation {
     # Mutations Producto
 nuevoProducto(input: ProductoInput): Producto
 actualizarProducto(input: ProductoInput): Producto
+eliminarProducto(id:ID): String 
 }
 `;
 

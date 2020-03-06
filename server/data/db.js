@@ -4,6 +4,7 @@ mongoose.Promise = global.Promise;
 
 //Connect to DB
 mongoose.connect("mongodb://localhost/clientes", { useNewUrlParser: true });
+mongoose.set('useUnifiedTopology', true);
 
 //Create DB
 const clientesSchema = new mongoose.Schema({
