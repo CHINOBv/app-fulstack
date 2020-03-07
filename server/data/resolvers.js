@@ -78,7 +78,7 @@ export const resolvers = {
     //Remove Client from DB
     eliminarCliente: (root, { id }) => {
       return new Promise((resolve, object) => {
-        Clientes.findOneAndDelet({ _id: id }, error => {
+        Clientes.findOneAndDelete({ _id: id }, error => {
           if (error) rejects(error);
           else resolve("Se Elimino el Cliente");
         });
@@ -118,7 +118,7 @@ export const resolvers = {
     },
     eliminarProducto: (root, {id}) =>{
       return new Promise( ( resolve, object ) =>{
-        Productos.findOneAndDelet({ _id: id }, error =>{
+        Productos.findOneAndDelete({ _id: id }, error =>{
           if (error) {
             rejects(error)
           }else {

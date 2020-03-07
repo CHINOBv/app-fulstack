@@ -1,6 +1,8 @@
 import { importSchema } from "graphql-import";
+import gql from 'graphql-tag';
 
-const typeDefs = `
+const typeDefs = gql`
+
 """ Clientes Querys """
 type Cliente {
     id: ID
@@ -85,6 +87,7 @@ nuevoProducto(input: ProductoInput): Producto
 actualizarProducto(input: ProductoInput): Producto
 eliminarProducto(id:ID): String 
 }
+
 `;
 
 export { typeDefs };

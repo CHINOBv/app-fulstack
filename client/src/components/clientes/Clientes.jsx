@@ -7,7 +7,7 @@ import Paginador from './Paginador.jsx';
 
 class Clientes extends Component{
 
-  limite = 3;
+  limite = 10;
 
   state={
     paginador: {
