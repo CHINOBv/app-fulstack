@@ -1,13 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+//Clientes
 import Header from "./clientes/Header.jsx";
 import Clientes from "./clientes/Clientes.jsx";
 import EditCliente from './clientes/EditCliente.jsx';
 import NuevoCliente from "./clientes/NuevoCliente.jsx";
-import NuevoProducto from './productos/NuevoProducto.jsx';
 
-//<Route exact path='/cliente/editar/:id' component={EditCliente}/>
+//Productos
+import NuevoProducto from './productos/NuevoProducto.jsx';
+import Productos from './productos/Productos.jsx';
+import EditProducto from './productos/EditProducto.jsx'
+
 class Routes extends Component {
   render() {
     return (
@@ -20,6 +24,8 @@ class Routes extends Component {
               <Route exact path="/cliente/nuevo" component={NuevoCliente} />
               <Route exact path="/cliente/editar/:id" component={EditCliente} />
               <Route exact path="/producto/nuevo" component={NuevoProducto}/>
+              <Route exact path= "/producto" component={Productos}/>
+              <Route exact path= "/producto/editar/:id" component={EditProducto}/>
             </Switch>
           </div>
         </Fragment>

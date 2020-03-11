@@ -3,12 +3,23 @@ import { Mutation } from 'react-apollo';
 
 import { NUEVO_PRODUCTO } from '../../mutations/index.js';
 
+const initialState = {
+    nombre: '',
+    precio: '',
+    stock: ''
+
+};
+
 class NuevoProducto extends Component {
 
     state={
-        nombre: '',
-        precio: '',
-        stock: ''
+        ...initialState    
+    }
+
+    cleanState = () => {
+        this.setState({
+            ...initialState
+        });
     }
 
     actualizarState = e =>{
@@ -21,7 +32,7 @@ class NuevoProducto extends Component {
     }
     validForm = () =>{
         const { nombre, precio, stock } = this.state;
-        const noValid = !nombre || !precio || !stock;
+        const noValid = !nombre.trim() || !precio || !stock;
 
         return noValid;
     }
@@ -31,7 +42,9 @@ class NuevoProducto extends Component {
 
     // Insert To Data Base
         NuevoProducto().then(data =>{
-            console.log(data)
+        //console.log(data)
+            this.cleanState();
+            this.props.history.push('/producto');
         });
 
     }
@@ -47,7 +60,7 @@ class NuevoProducto extends Component {
 
         return (
             <Fragment>
-                <h1 className="text-center">NuevoProducto</h1>
+                <h1 className="text-center mb-5">NuevoProducto</h1>
                 <div className="row justify-content-center">
                     <Mutation 
                         mutation={ NUEVO_PRODUCTO }
@@ -66,7 +79,7 @@ class NuevoProducto extends Component {
                                         name="nombre" 
                                         className="form-control" 
                                         placeholder="Nombre del Producto"
-                                        autocomplete= "off"
+                                        autoComplete= "off"
                                         onChange= {this.actualizarState}
                                     />
                                 </div>

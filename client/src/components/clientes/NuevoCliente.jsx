@@ -88,11 +88,11 @@ class NuevoCliente extends Component {
                   };
 
                   if (
-                    nombre === "" ||
-                    apellido === "" ||
-                    empresa === "" ||
-                    edad === "" ||
-                    tipo === ""
+                    nombre.trim() === "" ||
+                    apellido.trim() === "" ||
+                    empresa.trim() === "" ||
+                    edad.trim() === "" ||
+                    tipo.trim()=== ""
                   ) {
                     this.setState({
                       error: true
