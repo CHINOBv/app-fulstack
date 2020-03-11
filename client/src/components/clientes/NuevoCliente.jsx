@@ -31,7 +31,7 @@ class NuevoCliente extends Component {
 
   ReadCamp = i => e => {
     const NewEmail = this.state.emails.map((email, index) => {
-      if (i != index) return email;
+      if (i !== index) return email;
       return {
         ...email,
         email: e.target.value
