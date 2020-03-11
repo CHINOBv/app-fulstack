@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-import { PRODUCTOS_QUERY } from '../../querys/index.js'
+import { PRODUCTOS_QUERY } from '../../querys/index.js';
+import { ELIMINAR_PRODUCTO } from '../../mutations/index.js';
 
 class Productos extends Component {
 
@@ -38,11 +39,27 @@ class Productos extends Component {
 											<td>{item.precio}</td>
 											<td>{item.stock}</td>
 											<td>
+											<Mutation 
+												mutation={ ELIMINAR_PRODUCTO }
+													>
+												{eliminarProducto => (
 												<button 
 													type="button" 
-													className="btn btn-danger">
+													className="btn btn-danger"
+													onClick= { () => {
+														if(window.confirm(`Seguro de eliminar el producto ${item.nombre}`))
+															{eliminarProducto({
+																variables: {id}
+																});
+															}
+														}
+													}
+													
+													>
 													&times; Eliminar
 												</button>
+												)}
+											</Mutation>
 											</td>
 											<td>
 												<Link

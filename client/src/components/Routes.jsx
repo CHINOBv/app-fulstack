@@ -24,8 +24,8 @@ class Routes extends Component {
               <Route exact path="/cliente/nuevo" component={NuevoCliente} />
               <Route exact path="/cliente/editar/:id" component={EditCliente} />
               <Route exact path="/producto/nuevo" component={NuevoProducto}/>
-              <Route exact path= "/producto" component={Productos}/>
-              <Route exact path= "/producto/editar/:id" component={EditProducto}/>
+              <Route exact path= "/productos" component={Productos}/>
+              <Route exact path= "/productos/editar/:id" component={EditProducto}/>
             </Switch>
           </div>
         </Fragment>

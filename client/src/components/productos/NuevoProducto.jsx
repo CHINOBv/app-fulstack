@@ -44,7 +44,7 @@ class NuevoProducto extends Component {
         NuevoProducto().then(data =>{
         //console.log(data)
             this.cleanState();
-            this.props.history.push('/producto');
+            this.props.history.push('/productos');
         });
 
     }
