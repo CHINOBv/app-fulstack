@@ -116,14 +116,12 @@ export const resolvers = {
           );
       });
     },
-    eliminarProducto: (root, {id}) =>{
-      return new Promise( ( resolve, object ) =>{
-        Productos.findOneAndDelete({ _id: id }, error =>{
-          if (error) {
-            rejects(error)
-          }else {
-            resolve('Se ha eliminado el Producto')
-          }
+    
+    eliminarProducto: (root, {id}) => {
+      return new Promise(( resolve, object ) => {
+        Productos.findOneAndDelete({ _id: id }, error => {
+          if(error) rejects(error);
+          else resolve(" Se Ha Eliminado el Producto ");
         });
       });
     }

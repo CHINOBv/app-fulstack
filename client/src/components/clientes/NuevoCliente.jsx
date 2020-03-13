@@ -45,7 +45,7 @@ class NuevoCliente extends Component {
 
   render() {
     const { error } = this.setState;
-    let res = error ? (
+    const res = error ? (
       <p className="alert alert-danger p-3 text-center">
         Todos los campos son obligatorios
       </p>
