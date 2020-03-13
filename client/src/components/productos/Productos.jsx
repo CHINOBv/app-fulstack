@@ -87,7 +87,7 @@ class Productos extends Component {
 												<Link
 												type="button"
 												className="btn btn-success"
-												to={`/producto/editar/${id}`}
+												to={`/productos/editar/${id}`}
 												>
 												Editar
 												</Link>

@@ -1,54 +1,36 @@
-import React, { Component} from 'react';
+import React, { Component, Fragment} from 'react';
+
+import { PRODUCTO_QUERY } from '../../querys/index.js';
+import { Query } from 'react-apollo';
+
+import FormEditProducts from './FormEditProducts.jsx';
 
 class EditProducto extends Component {
 
 
     render() {
+        
+        const {id} = this.props.match.params;
+
         return (
-                <form 
-                    className="col-md-8" >
-                        <div className="form-group">
-                            <label>Nombre:</label>
-                            <input 
-                                onChange={this.actualizarState}
-                                type="text"
-                                name="nombre" 
-                                className="form-control" 
-                                placeholder="Nombre del Producto"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Precio:</label>
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">$</div>
-                                </div>
-                                <input 
-                                    onChange={this.actualizarState}
-                                    type="number" 
-                                    name="precio" 
-                                    className="form-control" 
-                                    placeholder="Precio del Producto"
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label>Stock:</label>
-                            <input 
-                                onChange={this.actualizarState}
-                                type="number" 
-                                name="stock" 
-                                className="form-control" 
-                                placeholder="stock del Producto" 
-                            />
-                        </div>
-                        <button 
-                            disabled={ this.validarForm() }
-                            type="submit" 
-                            className="btn btn-success float-right">
-                                    Guardar Cambios
-                        </button>
-                    </form>
+            <Fragment>
+               <h1 className="text-center">Editar Producto</h1>
+               <div className= "row justify-content-center">
+                   <Query 
+                    query={ PRODUCTO_QUERY } 
+                    variables= {{ id }}>
+                       {({ loading, error, data, refetch }) => {
+                            if(loading) return 'Cargando...';
+                            if(error) return `Error: ${error.message}`;
+                            return(
+                                <FormEditProducts 
+                                    data= {data} 
+                                    id= { id }/>
+                                );
+                       }}
+                   </Query>
+               </div>
+            </Fragment>
         );
     }
 }

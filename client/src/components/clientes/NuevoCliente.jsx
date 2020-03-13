@@ -44,17 +44,18 @@ class NuevoCliente extends Component {
   };
 
   render() {
-    const { error } = this.setState;
+    const { error } = this.state;
     const res = error ? (
       <p className="alert alert-danger p-3 text-center">
         Todos los campos son obligatorios
       </p>
     ) : (
-      ""
+      ''
     );
     return (
       <Fragment>
         <h2 className="text-center">Nuevo Cliente</h2>
+        {res}
         <Mutation
           mutation={NUEVO_CLIENTE}
           onCompleted={() => {
