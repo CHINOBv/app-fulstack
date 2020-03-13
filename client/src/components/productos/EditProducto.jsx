@@ -24,7 +24,8 @@ class EditProducto extends Component {
                             if(error) return `Error: ${error.message}`;
                             return(
                                 <FormEditProducts 
-                                    data= {data} 
+                                    data= {data}
+                                    refetch= {refetch} 
                                     id= { id }/>
                                 );
                        }}
