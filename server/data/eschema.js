@@ -41,6 +41,7 @@ type Query {
     # Producto Querys
     getProductos(limite: Int, offset: Int): [Producto]
     getProducto(id:ID): Producto
+    totalProductos: String
 }
 
 type Producto{

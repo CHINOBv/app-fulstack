@@ -59,7 +59,7 @@ class NuevoCliente extends Component {
         <Mutation
           mutation={NUEVO_CLIENTE}
           onCompleted={() => {
-            this.props.history.push("/");
+            this.props.history.push("/clientes");
           }}
         >
           {crearCliente => (

@@ -3,11 +3,12 @@ import { Query, Mutation } from "react-apollo";
 import { CLIENTES_QUERY } from "../../querys/index.js";
 import { Link } from "react-router-dom";
 import { ELIMINAR_CLIENTE } from "../../mutations/index.js";
-import Paginador from "./Paginador.jsx";
+import Paginador from "../layaut/Paginador.jsx";
 import Exito from '../alertas/Exito.jsx';
+import Spiner from '../layaut/Spiner.jsx';
 
 class Clientes extends Component {
-  limite = 10;
+  limite = 3;
 
   state = {
     paginador: {
@@ -51,7 +52,7 @@ class Clientes extends Component {
       >
         {({ loading, error, data, startPolling, stopPolling }) => {
           //Consulting
-          if (loading) return "Carg";
+          if (loading) return <Spiner/>;
           //Error Message
           if (error) return `Error: ${error.message}`;
           //Show Data'sf
@@ -70,6 +71,13 @@ class Clientes extends Component {
                           {item.nombre} {item.apellido} - {item.empresa}
                         </div>
                         <div className="col-md-4 d-flex justify-content-end">
+                          <Link 
+                          to={`/pedidos/nuevo/${id}`}
+                          className="btn btn-warning d-block d-md-inline-block mr-2 text-center"
+
+                          >
+                            &#43; Nuevo Pedido
+                          </Link>
                           <Mutation 
                             mutation={ELIMINAR_CLIENTE}
                             onCompleted= {(data) => {
@@ -103,7 +111,7 @@ class Clientes extends Component {
                             )}
                           </Mutation>
                           <Link
-                            to={`/cliente/editar/${item.id}`}
+                            to={`/clientes/editar/${item.id}`}
                             className="btn btn-success d-block d-md-inline-block ml-2"
                           >
                             Editar Cliente

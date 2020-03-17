@@ -67,8 +67,8 @@ class FormEditProducts extends Component {
             <Mutation 
                 mutation={ACTUALIZAR_PRODUCTO}
                 variables={{input}}
-            //    key={id}
-                onCompleted={console.log(this.props)}
+                key={id}
+                
             >
             {( actualizarProducto, {loading, error, data} ) =>{
 
