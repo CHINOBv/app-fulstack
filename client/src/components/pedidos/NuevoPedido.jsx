@@ -26,10 +26,10 @@ export class NuevoPedido extends Component {
 								if(loading) return <Spiner/>;
 								if(error) return `Error: ${error.message}`;
 								
-								//console.log(data)
+								console.log(data)
 								return(
 									<ContentPedidos
-										porductos={data.getProductos}
+										datas={data}
 										id={id}
 									/>
 								)

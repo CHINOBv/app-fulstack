@@ -1,27 +1,37 @@
-import React from 'react';
+import React,{ Component, Fragment } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-];
+export class ContentPedidos extends Component {
 
-export class ContentPedidos extends React.Component {
+	state={
+		products: []
+	}
 
+	selectProducto = (products) =>{
+		
+		this.setState({
+			products
+		});
+
+		//console.log(products);
+	}
 
 	render() {
+		const op = this.props.datas.getProductos;
 		return (
-			<div>
-				<h1>Pedidos</h1>
+			<Fragment>
+				<h2 className="text-center mb-5">Seleccionar Articulos</h2>
 				<Select 
-					options={options}
+					onChange={this.selectProducto}
+					options={op}
 					isMulti={true}
 					components={makeAnimated()}
-					placeholder="Seleccionar Productos"
+					placeholder={"Seleccionar Productos"}
+					getOptionValue={(options) => options.id}
+					getOptionLabel={(options) => options.nombre}
 				/>
-			</div>
+			</Fragment>
 		)
 	}
 }
