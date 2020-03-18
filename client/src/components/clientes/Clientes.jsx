@@ -124,7 +124,7 @@ class Clientes extends Component {
               </ul>
               <Paginador
                 actual={this.state.paginador.actual}
-                totalClientes={data.totalClientes}
+                total={data.totalClientes}
                 limite={this.limite}
                 paginaAnt={this.paginaAnt}
                 paginaSig={this.paginaSig}

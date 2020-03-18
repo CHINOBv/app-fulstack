@@ -33,8 +33,7 @@ function DatosCliente({ id }) {
 										data-target="#VerEmails">
 										Ver Emails
 									</button>
-
-									<div className="modal fade" id="VerEmails" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+									<div className="modal fade" id="VerEmails" tabIndex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 									  <div className="modal-dialog modal-dialog-scrollable" role="document">
 									    <div className="modal-content">
 									      <div className="modal-header">
@@ -44,7 +43,7 @@ function DatosCliente({ id }) {
 									        </button>
 									      </div>
 									      <div className="modal-body">
-									        {emails.map(email => <h5>{email.email}</h5>)}
+									        {emails.map(email => <h5 key={id}>{email.email}</h5>)}
 									      </div>
 									      <div className="modal-footer">
 									        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

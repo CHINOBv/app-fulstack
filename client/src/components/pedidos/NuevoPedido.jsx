@@ -1,7 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { Query } from 'react-apollo';
+import { PRODUCTOS_QUERY } from '../../querys'
 
 import DatosCliente from './DatosCliente.jsx';
+import ContentPedidos from './ContentPedidos.jsx';
+import Spiner from '../layaut/Spiner.jsx';
 
+						
 export class NuevoPedido extends Component {
 	render() {
 		const { id } = this.props.match.params;
@@ -15,7 +20,21 @@ export class NuevoPedido extends Component {
 						/>
 					</div>
 					<div className="col-md-9">
-						Pedido
+						<Query 
+							query={PRODUCTOS_QUERY}>
+							{({ loading, error, data }) =>{
+								if(loading) return <Spiner/>;
+								if(error) return `Error: ${error.message}`;
+								
+								//console.log(data)
+								return(
+									<ContentPedidos
+										porductos={data.getProductos}
+										id={id}
+									/>
+								)
+								}}					
+						</Query>
 					</div>
 				</div>
 			</Fragment>

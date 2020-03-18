@@ -3,8 +3,12 @@ import mongoose from "mongoose";
 mongoose.Promise = global.Promise;
 
 //Connect to DB
-mongoose.connect("mongodb://localhost/clientes", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/clientes", { 
+  useNewUrlParser: true ,
+  useCreateIndex: true
+});
 mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
 
 //Create DB
 const clientesSchema = new mongoose.Schema({
