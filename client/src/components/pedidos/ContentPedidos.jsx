@@ -2,6 +2,8 @@ import React,{ Component, Fragment } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
+import Resumen from './Resumen.jsx';
+
 export class ContentPedidos extends Component {
 
 	state={
@@ -30,6 +32,9 @@ export class ContentPedidos extends Component {
 					placeholder={"Seleccionar Productos"}
 					getOptionValue={(options) => options.id}
 					getOptionLabel={(options) => options.nombre}
+				/>
+				<Resumen
+				productos={this.state.products}
 				/>
 			</Fragment>
 		)
