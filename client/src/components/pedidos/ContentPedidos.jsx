@@ -19,6 +19,17 @@ export class ContentPedidos extends Component {
 		//console.log(products);
 	}
 
+	actualizarCant = (cant, index) =>{
+		const products = this.state.products;
+		products[index].cant = Number(cant);
+
+		console.log(products)
+
+		this.setState({
+			products
+		})
+	}
+
 	render() {
 		const op = this.props.datas.getProductos;
 		return (
@@ -34,7 +45,8 @@ export class ContentPedidos extends Component {
 					getOptionLabel={(options) => options.nombre}
 				/>
 				<Resumen
-				productos={this.state.products}
+					productos={this.state.products}
+					actualizarCant={this.actualizarCant}
 				/>
 			</Fragment>
 		)

@@ -13,6 +13,7 @@ export class Producto extends React.Component {
 						<input
 							type="number"
 							className="form-control"
+							onChange={e => this.props.actualizarCant(e.target.value, this.props.index) }
 						/>
 					</td>
 					<td>

@@ -24,6 +24,7 @@ function Resumen(props) {
 						id={producto.id}
 						producto={producto}
 						index={index}
+						actualizarCant={props.actualizarCant}
 						/>
 						))}
 				</tbody>
