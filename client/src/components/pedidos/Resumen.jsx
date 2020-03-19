@@ -3,7 +3,7 @@ import Producto from './Producto.jsx';
 
 function Resumen(props) {
 	const productos = props.productos;
-	if (productos.length == 0) return null;
+	if (!productos?.length) return null;
 	return (
 		<Fragment>
 			<h1 className="text-center mb-5 mt-5">Resumen</h1>
@@ -25,6 +25,7 @@ function Resumen(props) {
 						producto={producto}
 						index={index}
 						actualizarCant={props.actualizarCant}
+						eliminarProducto={props.eliminarProducto}
 						/>
 						))}
 				</tbody>

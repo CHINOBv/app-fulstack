@@ -7,7 +7,8 @@ import Resumen from './Resumen.jsx';
 export class ContentPedidos extends Component {
 
 	state={
-		products: []
+		products: [],
+		total: 0
 	}
 
 	selectProducto = (products) =>{
@@ -18,16 +19,54 @@ export class ContentPedidos extends Component {
 
 		//console.log(products);
 	}
+	
+	actualizarTotal = () => {
+		
+		const products = this.state.products;
+
+		if (products.length === 0){
+			this.setState({
+				total: 0
+			});
+			return;
+		}
+
+		let newTotal = 0;
+
+		products.map( product => newTotal += (product.cant * product.precio) )
+
+		this.setState({
+			total: newTotal
+		})
+
+	}
 
 	actualizarCant = (cant, index) =>{
+		
 		const products = this.state.products;
-		products[index].cant = Number(cant);
 
-		console.log(products)
+		products[index].cant = Number(cant);
 
 		this.setState({
 			products
+		}, () => {
+			this.actualizarTotal();
 		})
+
+	}
+
+	eliminarProducto = (id) => {
+		//console.log(id)
+		const products = this.state.products;
+
+		const productsRes = products.filter(product => product.id !== id);
+		
+		this.setState({
+			products: productsRes
+		}, () =>{
+			this.actualizarTotal();
+		})
+
 	}
 
 	render() {
@@ -43,11 +82,19 @@ export class ContentPedidos extends Component {
 					placeholder={"Seleccionar Productos"}
 					getOptionValue={(options) => options.id}
 					getOptionLabel={(options) => options.nombre}
+					value={this.state.products}
 				/>
 				<Resumen
 					productos={this.state.products}
 					actualizarCant={this.actualizarCant}
+					eliminarProducto={this.eliminarProducto}
 				/>
+				<p className="fotn-weight-bold float-right mt-3">
+					Total:
+					<span className="fotn-weight-normal">
+						$ {this.state.total}
+					</span>
+				</p>
 			</Fragment>
 		)
 	}
