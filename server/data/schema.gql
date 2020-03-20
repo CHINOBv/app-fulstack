@@ -9,10 +9,6 @@ type Cliente {
     tipo: TipoCliente
     pedidos: [Pedido]
 }
-type Pedido {
-    producto: String
-    precio: Int
-}
 type Email {
     email: String
 }
@@ -21,12 +17,31 @@ enum TipoCliente {
     BASICO
     PREMIUM
 }
+enum EstadoPedido {
+    PENDIENTE
+    COMPLETADO
+    CANCELADO
+}
 
 """ Producto Types """
 type getProducto {
     nombre: String
     precio: Int
     stock: Int
+}
+
+type Pedido {
+    id: ID
+    pedido: [PedidoProducto]
+    total: Int
+    fecha: String
+    cliente: ID
+    estado: EstadoPedido
+}
+
+type PedidoProducto {
+    id: ID
+    cantidad: Int
 }
 
 type Query {
@@ -50,10 +65,6 @@ type Producto{
 input EmailInput {
     email: String
 }
-input PedidoInput{
-    producto: String
-    precio: Int
-}
 input ClienteInput{
     id: ID
     nombre: String!
@@ -72,14 +83,28 @@ input ProductoInput{
     precio: Int!
     stock: Int!
 }
-
+""" Pedido Inputs """
+input PedidoInput{
+    id: ID
+    pedido: [PedidoProductoInput]
+    total: Int
+    fecha: String
+    cliente: ID
+    estado: EstadoPedido
+}
+input PedidoProductoInput {
+    id: ID
+    cantidad: Int
+}
 type Mutation {
     # Mutations Client
- crearCliente(input: ClienteInput)  : Cliente
- actualizarCliente(input: ClienteInput)  : Cliente
- eliminarCliente(id: ID!) : String
+    crearCliente(input: ClienteInput)  : Cliente
+    actualizarCliente(input: ClienteInput)  : Cliente
+    eliminarCliente(id: ID!) : String
     # Mutations Producto
-nuevoProducto(input: ProductoInput): Producto
-actualizarProducto(input: ProductoInput): Producto
-eliminarProducto(id:ID): String 
+    nuevoProducto(input: ProductoInput): Producto
+    actualizarProducto(input: ProductoInput): Producto
+    eliminarProducto(id:ID): String 
+    #Pedido
+    nuevoPedido(input: PedidoInput): Pedido
 }
