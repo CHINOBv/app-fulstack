@@ -49,7 +49,7 @@ type Query {
     getCliente(id: ID) : Cliente
     totalClientes: String
     # Producto Querys
-    getProductos(limite: Int, offset: Int): [Producto]
+    getProductos(limite: Int, offset: Int, stock: Boolean): [Producto]
     getProducto(id:ID): Producto
     totalProductos: String
 }
