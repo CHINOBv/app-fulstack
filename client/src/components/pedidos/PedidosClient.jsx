@@ -16,7 +16,7 @@ const PedidosClient = (props) => {
 					{({ loading, error, data, startPolling, stopPolling }) =>{
 							if(loading) return(<Spiner/>);
 							if(error) return `Error: ${error.message}`;
-							console.log(data);
+							//console.log(data);
 							
 							return(
 								data.getPedidos.map(pedido => (
