@@ -4,6 +4,7 @@ import makeAnimated from 'react-select/animated';
 
 import Resumen from './Resumen.jsx';
 import AddPedido from './AddPedido';
+import Error from '../alertas/Error.jsx';
 
 export class ContentPedidos extends Component {
 
@@ -34,7 +35,7 @@ export class ContentPedidos extends Component {
 
 		let newTotal = 0;
 
-		products.map( product => newTotal += (product.cant * product.precio) )
+		products.map( product => newTotal += (product.cantidad * product.precio) )
 
 		this.setState({
 			total: newTotal
@@ -42,11 +43,11 @@ export class ContentPedidos extends Component {
 
 	}
 
-	actualizarCant = (cant, index) =>{
+	actualizarCant = (cantidad, index) =>{
 		
 		const products = this.state.products;
 
-		products[index].cant = Number(cant);
+		products[index].cantidad = Number(cantidad);
 
 		this.setState({
 			products
@@ -72,9 +73,13 @@ export class ContentPedidos extends Component {
 
 	render() {
 		const op = this.props.datas.getProductos;
+		
+		const mensaje = (this.state.total < 0) ? <Error error="Las cantidades no pueden ser menor a 0"/> : '';
+
 		return (
 			<Fragment>
 				<h2 className="text-center mb-5">Seleccionar Articulos</h2>
+				{mensaje}
 				<Select 
 					onChange={this.selectProducto}
 					options={op}
@@ -99,6 +104,7 @@ export class ContentPedidos extends Component {
 				<AddPedido
 					products= {this.state.products}
 					total= {this.state.total}
+					idCliente= {this.props.id}
 				/>
 			</Fragment>
 		)

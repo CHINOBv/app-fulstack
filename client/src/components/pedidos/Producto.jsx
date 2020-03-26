@@ -11,9 +11,16 @@ export class Producto extends React.Component {
 					<td>{producto.stock}</td>
 					<td>
 						<input
+							min="1"
 							type="number"
 							className="form-control"
-							onChange={e => this.props.actualizarCant(e.target.value, this.props.index) }
+							onChange={ e => {
+								//|| e.target.value < 0
+									if (e.target.value > producto.stock){
+										e.target.value = 0;
+									}
+									this.props.actualizarCant(e.target.value, this.props.index)
+								}}
 						/>
 					</td>
 					<td>
