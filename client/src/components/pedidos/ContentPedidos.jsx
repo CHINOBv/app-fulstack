@@ -3,6 +3,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 import Resumen from './Resumen.jsx';
+import AddPedido from './AddPedido';
 
 export class ContentPedidos extends Component {
 
@@ -95,6 +96,10 @@ export class ContentPedidos extends Component {
 						$ {this.state.total}
 					</span>
 				</p>
+				<AddPedido
+					products= {this.state.products}
+					total= {this.state.total}
+				/>
 			</Fragment>
 		)
 	}
