@@ -12,7 +12,7 @@ function AddPedido(props) {
 	return (
 		<Mutation 
 			mutation= {NUEVO_PEDIDO}
-			onCompleted= { () => props.history.push('/clientes') }>
+			onCompleted= { () => props.refetch().then( () => props.history.push('/clientes')) }>
 			{ nuevoPedido => (				
 				<button
 					disabled= { validPedido(props) }

@@ -21,14 +21,15 @@ export class NuevoPedido extends Component {
 					</div>
 					<div className="col-md-9">
 						<Query 
-							query={PRODUCTOS_QUERY}>
-							{({ loading, error, data }) =>{
+							query={PRODUCTOS_QUERY} variables= {{stock: true}}>
+							{({ loading, error, data, refetch }) =>{
 								if(loading) return <Spiner/>;
 								if(error) return `Error: ${error.message}`;
 								
 							//console.log(data)
 								return(
 									<ContentPedidos
+										refetch= {refetch}
 										datas={data}
 										id={id}
 									/>
