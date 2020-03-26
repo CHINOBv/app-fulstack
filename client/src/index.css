@@ -63,3 +63,6 @@
             transform: scale3D(0, 0, 1);
   } 
 }
+.card{
+  border-width: 2px
+}

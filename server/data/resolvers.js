@@ -154,20 +154,34 @@ export const resolvers = {
         estado: "PENDIENTE"
       });
       nuevoPedido.id = nuevoPedido._id;
-      return new Promise( ( resolve, object ) => {
-      //Actualizar la cantidad de Productos
+      return new Promise( ( resolve, object ) => {        
+        nuevoPedido.save(( error ) => {
+          if (error) rejects(error)
+            else resolve(nuevoPedido)
+        });
+      });
+    },
+    actualizarEstado : (root, { input }) =>{
+      return new Promise((resolve, object) => {
         input.pedido.forEach(pedido => {
+          const { estado } = input;
+          let instruccion;
+          if (estado === "COMPLETADO") {
+            instruccion = '-'
+          } else if(estado === "CANCELADO"){
+            instruccion = '+';
+          }
           Productos.updateOne({ _id: pedido.id },
             {
-            "$inc":{ "stock": -pedido.cantidad }
+            "$inc":{ "stock": `${instruccion}${pedido.cantidad}` }
             }, function (error) {
               if(error) return new Error(error)
             }
           );
         });
-        nuevoPedido.save(( error ) => {
-          if (error) rejects(error)
-            else resolve(nuevoPedido)
+        Pedidos.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error) => {
+          if(error) rejects(error);
+          else resolve("Se actualizo Correctamente");
         });
       });
     }

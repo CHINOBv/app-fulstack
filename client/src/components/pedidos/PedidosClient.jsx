@@ -12,8 +12,8 @@ const PedidosClient = (props) => {
 		<Fragment>
 			<h2 className="text-center mb-5">Pedidos</h2>
 			<div className="row">
-				<Query query={PEDIDOS_QUERY} variables={{cliente}} pollInterval={500}>
-					{({ loading, error, data, startPolling, stopPolling }) =>{
+				<Query query={PEDIDOS_QUERY} pollInterval={500} variables={{cliente}}>
+					{({ loading, error, data, startPolling, stopPolling, refetch }) =>{
 							if(loading) return(<Spiner/>);
 							if(error) return `Error: ${error.message}`;
 							//console.log(data);
@@ -24,6 +24,7 @@ const PedidosClient = (props) => {
 										key={pedido.id}
 										pedido={pedido}
 										cliente={cliente}
+										refetch={refetch}
 										/>
 								))
 							);
