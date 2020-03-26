@@ -1,7 +1,9 @@
 import React from 'react'
-import { Query } from 'react-apollo';
-
+import { Query, Mutation } from 'react-apollo';
 import { PRODUCTO_QUERY } from '../../querys/index.js'
+
+import ResProducto from './ResProducto.jsx'
+import Spiner from '../layaut/Spiner.jsx';
 
 const Pedido = (props) => {
 	
@@ -10,12 +12,18 @@ const Pedido = (props) => {
 	//console.log(pedido)
 	return (
 		<div className="col-md-4">
-		    <div className={`card mb-3`} >
+		    <div className="card mb-3">
 		        <div className="card-body">
 		            <p className="card-text font-weight-bold ">Estado: 
 		                    <select 
 		                    		className="form-control my-3"
-		                    		value={pedido.estado}
+		                    		defaultValue={pedido.estado}
+		                    		onChange={ e => {
+		                    			const input = {
+		                    				estado: e.target.value
+		                    			}	
+		                    			console.log(input)
+	                    			}}
 	                    		>
 		                            <option value="PENDIENTE">PENDIENTE</option>
 		                            <option value="COMPLETADO">COMPLETADO</option>
@@ -33,9 +41,25 @@ const Pedido = (props) => {
 		            </p>
 
 		            <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
-		            {pedido.pedido.map(product => {
-						console.log(product)
-						return <h2>Hola</h2>
+		            {pedido.pedido.map((product, index) => {
+		            	const {id} = product;
+						return(
+							<Query key={pedido.id+index} query={PRODUCTO_QUERY} variables={{id}}  pollInterval={500}>
+		            			{({ loading, error, data, startPolling, stopPolling }) => {
+		            				if(loading) return <Spiner/>;
+		            				if(error) return `Error: ${error.message}`;
+		            				console.log(data);
+		            				const producto = data.getProducto;
+		            				return(
+		            						<ResProducto
+		            							key={producto.id}
+												producto= {data.getProducto}
+												cantidad= {producto.cantidad}
+		            						/>
+	            					)
+	            				}}
+		            		</Query>	
+						)
             		})}
 		        </div>
 		    </div>
