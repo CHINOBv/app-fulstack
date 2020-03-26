@@ -13,7 +13,8 @@ import Productos from './productos/Productos.jsx';
 import EditProducto from './productos/EditProducto.jsx';
 
 //Pedidos
-import NuevoPedido from './pedidos/NuevoPedido.jsx'
+import NuevoPedido from './pedidos/NuevoPedido.jsx';
+import PedidosClient from './pedidos/PedidosClient.jsx';
 
 class Routes extends Component {
   render() {
@@ -33,6 +34,7 @@ class Routes extends Component {
               <Route exact path= "/productos/editar/:id" component={EditProducto}/>
               
               <Route exact path= "/pedidos/nuevo/:id" component={NuevoPedido} />
+              <Route exact path= "/pedidos/:id" component={PedidosClient} />
             </Switch>
           </div>
         </Fragment>

@@ -53,3 +53,20 @@ export const PRODUCTO_QUERY = gql`
   }
 
 `;
+
+export const PEDIDOS_QUERY = gql`
+
+  query getPedidos($cliente: String){
+    getPedidos(cliente: $cliente){
+      id
+      pedido{
+        id
+        cantidad
+      }
+      total
+      fecha
+      cliente
+      estado
+    }
+  }
+`;
