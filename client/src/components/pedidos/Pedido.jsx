@@ -73,7 +73,7 @@ const Pedido = (props) => {
 		            				if(loading) return <Spiner/>;
 		            				if(error) return `Error: ${error.message}`;
 		            				const producto = data.getProducto;
-		            				console.log(producto.cantidad);
+		            				//console.log(producto.cantidad);
 		            				return(
 		            						<ResProducto
 		            							key={producto.id}
