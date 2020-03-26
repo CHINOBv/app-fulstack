@@ -134,7 +134,7 @@ export const resolvers = {
       });
     },
     nuevoPedido: (root, {input}) => {
-      nuevoPedido = new Pedidos({
+      const nuevoPedido = new Pedidos({
         pedido: input.pedido,
         total: input.total,
         fecha: new Date(),
