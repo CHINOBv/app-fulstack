@@ -48,6 +48,10 @@ type ClienteTotal {
     cliente:[Cliente]
 }
 
+type Token {
+    token: String!
+}
+
 type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
     getCliente(id: ID) : Cliente
@@ -117,4 +121,5 @@ type Mutation {
     nuevoPedido(input: PedidoInput): Pedido
     actualizarEstado(input:PedidoInput): String
     crearUsuario(usuario: String!, password: String!) : String
+    autenticarUsuario(usuario: String!, password: String!): Token
 }

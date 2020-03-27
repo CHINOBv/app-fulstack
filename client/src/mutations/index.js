@@ -89,3 +89,13 @@ export const CREAR_USUARIO = gql`
   }
 
 `;
+
+export const AUTH_USER = gql`
+  
+  mutation autenticarUsuario($usuario:String!, $password:String!){
+    autenticarUsuario(usuario: $usuario, password:$password){
+      token
+    }
+  }
+
+`;

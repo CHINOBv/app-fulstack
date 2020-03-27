@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
 import { Clientes, Productos, Pedidos, Usuarios } from "./db.js";
+import bcrypt from 'bcrypt';
+
+//Generate Token
+import dotenv from 'dotenv';
+dotenv.config({path: 'variables.env'});
+
+import jwt from 'jsonwebtoken';
+
+const createToken = ( usuarioLogin, secreto, expiresIn ) => {
+  const {usuario} = usuarioLogin;
+
+  return jwt.sign( {usuario}, secreto, {expiresIn} );
+}
 
 //Export Resolvs
 export const resolvers = {
@@ -231,6 +244,24 @@ export const resolvers = {
         password
       }).save();
       return "Creado Correctamente";
+    },
+    autenticarUsuario: async( root, { usuario, password } ) => {
+      const nombreUsuario = await Usuarios.findOne({usuario});
+
+      if(!nombreUsuario){
+        throw new Error('El Usuario No Existe');
+      }
+
+      const passwordCorrect = await bcrypt.compare( password, nombreUsuario.password );
+
+      if(!passwordCorrect){
+        throw new Error("Password Incorrecto");
+      }
+
+      return {
+        token: createToken( nombreUsuario, process.env.SECRETO, "24hr" )
+      }
+
     }
   }
 };
