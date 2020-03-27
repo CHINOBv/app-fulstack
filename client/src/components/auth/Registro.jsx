@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo';
 import { CREAR_USUARIO } from '../../mutations/index.js';
 
@@ -39,11 +40,12 @@ export class Registro extends React.Component {
 	}
 	crearRegistro = (e, crearUsuario) => {
 		e.preventDefault();
-		console.log("Creando Registro")
+		//console.log("Creando Registro")
 
 		crearUsuario().then( data => {
 			//console.log(data)
 			this.cleanState();
+			this.props.history.push('/login');
 		}).catch(error => {
 			this.setState({
 				error
@@ -105,7 +107,7 @@ export class Registro extends React.Component {
 					            </div>
 
 					            <button 
-					            	disabled={this.validForm()}
+					            	disabled={ loading || this.validForm() }
 					                type="submit" 
 					                className="btn btn-success float-right">
 					                    Crear Usuario
@@ -120,4 +122,4 @@ export class Registro extends React.Component {
 	}
 }
 
-export default Registro
+export default withRouter(Registro)

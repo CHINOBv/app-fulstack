@@ -21,6 +21,7 @@ import Panel from './panel/Panel.jsx'
 
 //Auth
 import Registro from './auth/Registro.jsx'
+import Login from './auth/Login.jsx';
 
 class Routes extends Component {
   render() {
@@ -45,6 +46,8 @@ class Routes extends Component {
               <Route exact path= "/panel" component={Panel} />
 
               <Route exact path= "/registro" component={Registro} />
+              <Route exact path= "/login" component={Login} />
+
             </Switch>
           </div>
         </Fragment>
