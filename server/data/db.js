@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcrypt'
 
 mongoose.Promise = global.Promise;
 
@@ -45,4 +46,27 @@ const predidosSchema = new mongoose.Schema({
 });
 const Pedidos = mongoose.model('pedidos', predidosSchema);
 
-export { Clientes, Productos, Pedidos };
+//Usuarios
+const usuariosSchema = new mongoose.Schema({
+  usuario: String,
+  password: String
+});
+//hash passwords
+usuariosSchema.pre('save', function(next) {
+  //si tiene hash no hash xd
+  if(!this.isModified('password')){
+    return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+    if(err) return next(err);
+    bcrypt.hash(this.password, salt, (err, hash) => {
+          if(err) return next(err);
+          this.password = hash;
+          next();
+    });
+  });
+})
+
+const Usuarios = mongoose.model('usuarios', usuariosSchema);
+
+export { Clientes, Productos, Pedidos, Usuarios };
