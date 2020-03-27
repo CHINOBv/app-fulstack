@@ -7,7 +7,8 @@ import Error from '../alertas/Error.jsx';
 const initState ={
 	usuario: '',
 	password: '',
-	repetirPassword: ''
+	repetirPassword: '',
+	error:''
 }
 
 export class Registro extends React.Component {
@@ -43,11 +44,16 @@ export class Registro extends React.Component {
 		crearUsuario().then( data => {
 			//console.log(data)
 			this.cleanState();
+		}).catch(error => {
+			this.setState({
+				error
+			})
 		})
 	}
 
 	render() {
-		const { usuario, password, repetirPassword } = this.state;
+		const { usuario, password, repetirPassword, error } = this.state;
+		const mensaje = error ? <Error error={error}/>: '';
 		return (
 			<Fragment>
 				<h1 className="text-center mb-5">Nuevo Usuario</h1>
@@ -56,14 +62,14 @@ export class Registro extends React.Component {
 						mutation={CREAR_USUARIO}
 						variables={{usuario, password}}
 						>
-						{(crearUsuario, { loading, error, data, refetch}) => {
+						{(crearUsuario, { loading, error, data}) => {
 					 		return (
 						 
 						    <form 
 						        className="col-md-8"
 						        onSubmit= {e => this.crearRegistro(e, crearUsuario)}
 						    >
-						    	
+						    	{ mensaje }	
 					            <div className="form-group">
 					                <label>Usuario</label>
 					                <input 
