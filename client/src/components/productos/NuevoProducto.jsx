@@ -12,8 +12,8 @@ const initialState = {
 
 class NuevoProducto extends Component {
 
-    state={
-        ...initialState    
+    state = {
+        ...initialState
     }
 
     cleanState = () => {
@@ -22,7 +22,7 @@ class NuevoProducto extends Component {
         });
     }
 
-    actualizarState = e =>{
+    actualizarState = e => {
         const { name, value } = e.target;
 
         this.setState({
@@ -30,19 +30,19 @@ class NuevoProducto extends Component {
         });
 
     }
-    validForm = () =>{
+    validForm = () => {
         const { nombre, precio, stock } = this.state;
         const noValid = !nombre.trim() || !precio || !stock;
 
         return noValid;
     }
 
-    crearProducto = ( e, NuevoProducto ) => {
+    crearProducto = (e, NuevoProducto) => {
         e.preventDefault();
 
-    // Insert To Data Base
-        NuevoProducto().then(data =>{
-        //console.log(data)
+        // Insert To Data Base
+        NuevoProducto().then(data => {
+            //console.log(data)
             this.cleanState();
             this.props.history.push('/productos');
         });
@@ -50,7 +50,7 @@ class NuevoProducto extends Component {
     }
 
     render() {
-    
+
         const { nombre, precio, stock } = this.state;
         const input = {
             nombre,
@@ -62,63 +62,63 @@ class NuevoProducto extends Component {
             <Fragment>
                 <h1 className="text-center mb-5">NuevoProducto</h1>
                 <div className="row justify-content-center">
-                    <Mutation 
-                        mutation={ NUEVO_PRODUCTO }
-                        variables= {{input}}
+                    <Mutation
+                        mutation={NUEVO_PRODUCTO}
+                        variables={{ input }}
                     >
-                    {(NuevoProducto, { loading, error, data })=>{
-                        return (
-                            <form 
-                                className="col-md-8"
-                                onSubmit = { e => this.crearProducto( e, NuevoProducto ) }
-                              >
-                                <div className="form-group">
-                                    <label>Nombre:</label>
-                                    <input 
-                                        type="text"
-                                        name="nombre" 
-                                        className="form-control" 
-                                        placeholder="Nombre del Producto"
-                                        autoComplete= "off"
-                                        onChange= {this.actualizarState}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Precio:</label>
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">$</div>
-                                        </div>
-                                        <input 
-                                            type="number" 
-                                            name="precio" 
-                                            className="form-control" 
-                                            placeholder="Precio del Producto"
-                                            onChange= {this.actualizarState}
+                        {(NuevoProducto, { loading, error, data }) => {
+                            return (
+                                <form
+                                    className="col-md-8"
+                                    onSubmit={e => this.crearProducto(e, NuevoProducto)}
+                                >
+                                    <div className="form-group">
+                                        <label>Nombre:</label>
+                                        <input
+                                            type="text"
+                                            name="nombre"
+                                            className="form-control"
+                                            placeholder="Nombre del Producto"
+                                            autoComplete="off"
+                                            onChange={this.actualizarState}
                                         />
                                     </div>
-                                </div>
-                                <div className="form-group">
-                                    <label>Stock:</label>
-                                    <input 
-                                        type="number" 
-                                        name="stock" 
-                                        className="form-control" 
-                                        placeholder="stock del Producto" 
-                                        onChange= {this.actualizarState}
-                                    />
-                                </div>
-                                <button 
-                                    
-                                    disabled= {this.validForm()}
+                                    <div className="form-group">
+                                        <label>Precio:</label>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <div className="input-group-text">$</div>
+                                            </div>
+                                            <input
+                                                type="number"
+                                                name="precio"
+                                                className="form-control"
+                                                placeholder="Precio del Producto"
+                                                onChange={this.actualizarState}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Stock:</label>
+                                        <input
+                                            type="number"
+                                            name="stock"
+                                            className="form-control"
+                                            placeholder="stock del Producto"
+                                            onChange={this.actualizarState}
+                                        />
+                                    </div>
+                                    <button
 
-                                    type="submit" 
-                                    className="btn btn-success float-right">
+                                        disabled={this.validForm()}
+
+                                        type="submit"
+                                        className="btn btn-success float-right">
                                         Crear Producto
                                 </button>
-                            </form>
-                        );
-                    }}
+                                </form>
+                            );
+                        }}
                     </Mutation>
                 </div>
             </Fragment>

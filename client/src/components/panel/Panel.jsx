@@ -5,7 +5,7 @@ const Panel = () => {
 	return (
 		<div>
 			<h1>Panel</h1>
-			<Clients/>
+			<Clients />
 		</div>
 	)
 }

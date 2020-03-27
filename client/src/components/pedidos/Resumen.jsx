@@ -1,4 +1,4 @@
-import React,{ Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Producto from './Producto.jsx';
 
 function Resumen(props) {
@@ -20,14 +20,14 @@ function Resumen(props) {
 				<tbody>
 					{productos.map((producto, index) => (
 						<Producto
-						key={producto.id}
-						id={producto.id}
-						producto={producto}
-						index={index}
-						actualizarCant={props.actualizarCant}
-						eliminarProducto={props.eliminarProducto}
+							key={producto.id}
+							id={producto.id}
+							producto={producto}
+							index={index}
+							actualizarCant={props.actualizarCant}
+							eliminarProducto={props.eliminarProducto}
 						/>
-						))}
+					))}
 				</tbody>
 			</table>
 		</Fragment>

@@ -7,8 +7,8 @@ const typeDefs = fs.readFileSync("./data/schema.gql", "utf8");
 
 const app = express();
 
-const server = new ApolloServer({ typeDefs, resolvers});
+const server = new ApolloServer({ typeDefs, resolvers });
 
 server.applyMiddleware({ app });
 
-app.listen({port: 4000},() => console.log(`Server Runing ${server.graphqlPath}`));
+app.listen({ port: 4000 }, () => console.log(`Server Runing ${server.graphqlPath}`));

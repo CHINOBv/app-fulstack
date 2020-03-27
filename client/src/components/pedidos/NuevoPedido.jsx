@@ -6,7 +6,7 @@ import DatosCliente from './DatosCliente.jsx';
 import ContentPedidos from './ContentPedidos.jsx';
 import Spiner from '../layaut/Spiner.jsx';
 
-						
+
 export class NuevoPedido extends Component {
 	render() {
 		const { id } = this.props.match.params;
@@ -16,25 +16,25 @@ export class NuevoPedido extends Component {
 				<div className="row">
 					<div className="col-md-3">
 						<DatosCliente
-							id={ id }
+							id={id}
 						/>
 					</div>
 					<div className="col-md-9">
-						<Query 
-							query={PRODUCTOS_QUERY} variables= {{stock: true}}>
-							{({ loading, error, data, refetch }) =>{
-								if(loading) return <Spiner/>;
-								if(error) return `Error: ${error.message}`;
-								
-							//console.log(data)
-								return(
+						<Query
+							query={PRODUCTOS_QUERY} variables={{ stock: true }}>
+							{({ loading, error, data, refetch }) => {
+								if (loading) return <Spiner />;
+								if (error) return `Error: ${error.message}`;
+
+								//console.log(data)
+								return (
 									<ContentPedidos
-										refetch= {refetch}
+										refetch={refetch}
 										datas={data}
 										id={id}
 									/>
 								)
-								}}					
+							}}
 						</Query>
 					</div>
 				</div>

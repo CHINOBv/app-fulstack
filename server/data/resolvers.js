@@ -17,77 +17,77 @@ export const resolvers = {
         });
       });
     },
-    totalClientes: (root) =>{
+    totalClientes: (root) => {
       return new Promise((resolve, object) => {
         Clientes.countDocuments({}, (error, count) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(count)
         })
       })
     },
-    getProductos: (root, { limite, offset, stock })=>{
+    getProductos: (root, { limite, offset, stock }) => {
       let filtro;
-      if(stock){
-        filtro = { stock: {$gt: 0} }
+      if (stock) {
+        filtro = { stock: { $gt: 0 } }
       }
       return Productos.find(filtro).limit(limite).skip(offset);
     },
     getProducto: (root, { id }) => {
       return new Promise((resolve, object) => {
         Productos.findById(id, (error, Producto) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(Producto);
         });
       });
     },
-    totalProductos: (root) =>{
+    totalProductos: (root) => {
       return new Promise((resolve, object) => {
         Productos.countDocuments({}, (error, count) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(count)
         })
       })
     },
-    getPedidos: ( root, {cliente} ) =>{
-      return new Promise ( ( resolve, object ) => {
-        Pedidos.find({cliente: cliente}, ( error, pedido ) => {
-          if(error) rejects(error);
+    getPedidos: (root, { cliente }) => {
+      return new Promise((resolve, object) => {
+        Pedidos.find({ cliente: cliente }, (error, pedido) => {
+          if (error) rejects(error);
           else resolve(pedido)
         })
-      } )
+      })
     },
-    topClientes : (root) => {
-      return new Promise(( resolve, object ) => {
+    topClientes: (root) => {
+      return new Promise((resolve, object) => {
         Pedidos.aggregate([
-            {
-                $match: {
-                    estado: "COMPLETADO"
-                }
-            },
-            {
-                $group: {
-                    _id: "$cliente",
-                    total:{ $sum: "$total" }
-                }
-            },
-            {
-                $lookup:{
-                    from: "clientes",
-                    localField: "_id",
-                    foreignField: "_id",
-                    as: "cliente"
-                }
-            },
-            {
-                $sort: {
-                    total: -1 
-                }
-            },
-            {
-                $limit: 10
+          {
+            $match: {
+              estado: "COMPLETADO"
             }
+          },
+          {
+            $group: {
+              _id: "$cliente",
+              total: { $sum: "$total" }
+            }
+          },
+          {
+            $lookup: {
+              from: "clientes",
+              localField: "_id",
+              foreignField: "_id",
+              as: "cliente"
+            }
+          },
+          {
+            $sort: {
+              total: -1
+            }
+          },
+          {
+            $limit: 10
+          }
         ], (error, res) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(res);
         })
       });
@@ -140,48 +140,48 @@ export const resolvers = {
         });
       });
     },
-    nuevoProducto: (root,{ input }) => {
+    nuevoProducto: (root, { input }) => {
       const nuevoProducto = new Productos({
         nombre: input.nombre,
         precio: input.precio,
         stock: input.stock
       });
-      
+
       nuevoProducto.id = nuevoProducto._id;
 
       return new Promise((resolve, object) => {
         nuevoProducto.save((error) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(nuevoProducto);
         });
       });
     },
-    actualizarProducto: (root, { input }) =>{
-      return new Promise( ( resolve, Producto ) => {
+    actualizarProducto: (root, { input }) => {
+      return new Promise((resolve, Producto) => {
         Productos.findOneAndUpdate(
-          {_id: input.id},
+          { _id: input.id },
           input,
-          {new: true},
-          (error, Producto) =>{
+          { new: true },
+          (error, Producto) => {
             if (error) {
               rejects(error);
-            }else {
+            } else {
               resolve(Producto);
             }
           }
-          );
+        );
       });
     },
-    
-    eliminarProducto: (root, {id}) => {
-      return new Promise(( resolve, object ) => {
+
+    eliminarProducto: (root, { id }) => {
+      return new Promise((resolve, object) => {
         Productos.findOneAndDelete({ _id: id }, error => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve(" Se Ha Eliminado el Producto ");
         });
       });
     },
-    nuevoPedido: (root, {input}) => {
+    nuevoPedido: (root, { input }) => {
       const nuevoPedido = new Pedidos({
         pedido: input.pedido,
         total: input.total,
@@ -190,40 +190,40 @@ export const resolvers = {
         estado: "PENDIENTE"
       });
       nuevoPedido.id = nuevoPedido._id;
-      return new Promise( ( resolve, object ) => {        
-        nuevoPedido.save(( error ) => {
+      return new Promise((resolve, object) => {
+        nuevoPedido.save((error) => {
           if (error) rejects(error)
-            else resolve(nuevoPedido)
+          else resolve(nuevoPedido)
         });
       });
     },
-    actualizarEstado : (root, { input }) =>{
+    actualizarEstado: (root, { input }) => {
       return new Promise((resolve, object) => {
         input.pedido.forEach(pedido => {
           const { estado } = input;
           let instruccion;
           if (estado === "COMPLETADO") {
             instruccion = '-'
-          } else if(estado === "CANCELADO"){
+          } else if (estado === "CANCELADO") {
             instruccion = '+';
           }
           Productos.updateOne({ _id: pedido.id },
             {
-            "$inc":{ "stock": `${instruccion}${pedido.cantidad}` }
+              "$inc": { "stock": `${instruccion}${pedido.cantidad}` }
             }, function (error) {
-              if(error) return new Error(error)
+              if (error) return new Error(error)
             }
           );
         });
         Pedidos.findOneAndUpdate({ _id: input.id }, input, { new: true }, (error) => {
-          if(error) rejects(error);
+          if (error) rejects(error);
           else resolve("Se actualizo Correctamente");
         });
       });
     },
-    crearUsuario : async(root,{ usuario, password }) => {
+    crearUsuario: async (root, { usuario, password }) => {
       const exsitUser = await Usuarios.findOne({ usuario });
-      if(exsitUser) {
+      if (exsitUser) {
         throw new Error('El usuario ya existe');
       }
       const nuevoUsuario = await new Usuarios({

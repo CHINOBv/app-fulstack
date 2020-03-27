@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt'
 mongoose.Promise = global.Promise;
 
 //Connect to DB
-mongoose.connect("mongodb://localhost/clientes", { 
-  useNewUrlParser: true ,
+mongoose.connect("mongodb://localhost/clientes", {
+  useNewUrlParser: true,
   useCreateIndex: true
 });
 mongoose.set('useUnifiedTopology', true);
@@ -26,10 +26,10 @@ const clientesSchema = new mongoose.Schema({
 const Clientes = mongoose.model("clientes", clientesSchema);
 
 const productosSchema = new mongoose.Schema({
-	
-	nombre: String,
-	precio: Number,
-	stock: Number
+
+  nombre: String,
+  precio: Number,
+  stock: Number
 
 });
 
@@ -52,17 +52,17 @@ const usuariosSchema = new mongoose.Schema({
   password: String
 });
 //hash passwords
-usuariosSchema.pre('save', function(next) {
+usuariosSchema.pre('save', function (next) {
   //si tiene hash no hash xd
-  if(!this.isModified('password')){
+  if (!this.isModified('password')) {
     return next();
   }
   bcrypt.genSalt(10, (error, salt) => {
-    if(error) return next(error);
+    if (error) return next(error);
     bcrypt.hash(this.password, salt, (error, hash) => {
-          if(error) return next(error)
-          this.password = hash;
-          next();
+      if (error) return next(error)
+      this.password = hash;
+      next();
     });
   });
 })

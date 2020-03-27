@@ -50,8 +50,8 @@ class NuevoCliente extends Component {
         Todos los campos son obligatorios
       </p>
     ) : (
-      ''
-    );
+        ''
+      );
     return (
       <Fragment>
         <h2 className="text-center">Nuevo Cliente</h2>
@@ -93,7 +93,7 @@ class NuevoCliente extends Component {
                     apellido.trim() === "" ||
                     empresa.trim() === "" ||
                     edad.trim() === "" ||
-                    tipo.trim()=== ""
+                    tipo.trim() === ""
                   ) {
                     this.setState({
                       error: true

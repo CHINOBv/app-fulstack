@@ -1,4 +1,4 @@
-import React,{ Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -8,25 +8,25 @@ import Error from '../alertas/Error.jsx';
 
 export class ContentPedidos extends Component {
 
-	state={
+	state = {
 		products: [],
 		total: 0
 	}
 
-	selectProducto = (products) =>{
-		
+	selectProducto = (products) => {
+
 		this.setState({
 			products
 		});
 
 		//console.log(products);
 	}
-	
+
 	actualizarTotal = () => {
-		
+
 		const products = this.state.products;
 
-		if (products.length === 0){
+		if (products.length === 0) {
 			this.setState({
 				total: 0
 			});
@@ -35,7 +35,7 @@ export class ContentPedidos extends Component {
 
 		let newTotal = 0;
 
-		products.map( product => newTotal += (product.cantidad * product.precio) )
+		products.map(product => newTotal += (product.cantidad * product.precio))
 
 		this.setState({
 			total: newTotal
@@ -43,8 +43,8 @@ export class ContentPedidos extends Component {
 
 	}
 
-	actualizarCant = (cantidad, index) =>{
-		
+	actualizarCant = (cantidad, index) => {
+
 		const products = this.state.products;
 
 		products[index].cantidad = Number(cantidad);
@@ -62,10 +62,10 @@ export class ContentPedidos extends Component {
 		const products = this.state.products;
 
 		const productsRes = products.filter(product => product.id !== id);
-		
+
 		this.setState({
 			products: productsRes
-		}, () =>{
+		}, () => {
 			this.actualizarTotal();
 		})
 
@@ -73,14 +73,14 @@ export class ContentPedidos extends Component {
 
 	render() {
 		const op = this.props.datas.getProductos;
-		
-		const mensaje = (this.state.total < 0) ? <Error error="Las cantidades no pueden ser menor a 0"/> : '';
+
+		const mensaje = (this.state.total < 0) ? <Error error="Las cantidades no pueden ser menor a 0" /> : '';
 
 		return (
 			<Fragment>
 				<h2 className="text-center mb-5">Seleccionar Articulos</h2>
 				{mensaje}
-				<Select 
+				<Select
 					onChange={this.selectProducto}
 					options={op}
 					isMulti={true}
@@ -102,9 +102,9 @@ export class ContentPedidos extends Component {
 					</span>
 				</p>
 				<AddPedido
-					products= {this.state.products}
-					total= {this.state.total}
-					idCliente= {this.props.id}
+					products={this.state.products}
+					total={this.state.total}
+					idCliente={this.props.id}
 					refetch={this.props.refetch}
 				/>
 			</Fragment>

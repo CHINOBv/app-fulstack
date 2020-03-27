@@ -31,22 +31,22 @@ class Routes extends Component {
           <Header />
           <div className="container">
             <Switch>
-              
+
               <Route exact path="/clientes" component={Clientes} />
               <Route exact path="/clientes/nuevo" component={NuevoCliente} />
               <Route exact path="/clientes/editar/:id" component={EditCliente} />
-              
-              <Route exact path= "/productos" component={Productos}/>
-              <Route exact path="/productos/nuevo" component={NuevoProducto}/>
-              <Route exact path= "/productos/editar/:id" component={EditProducto}/>
-              
-              <Route exact path= "/pedidos/nuevo/:id" component={NuevoPedido} />
-              <Route exact path= "/pedidos/:id" component={PedidosClient} />
 
-              <Route exact path= "/panel" component={Panel} />
+              <Route exact path="/productos" component={Productos} />
+              <Route exact path="/productos/nuevo" component={NuevoProducto} />
+              <Route exact path="/productos/editar/:id" component={EditProducto} />
 
-              <Route exact path= "/registro" component={Registro} />
-              <Route exact path= "/login" component={Login} />
+              <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido} />
+              <Route exact path="/pedidos/:id" component={PedidosClient} />
+
+              <Route exact path="/panel" component={Panel} />
+
+              <Route exact path="/registro" component={Registro} />
+              <Route exact path="/login" component={Login} />
 
             </Switch>
           </div>
