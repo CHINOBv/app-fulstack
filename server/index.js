@@ -7,7 +7,11 @@ const typeDefs = fs.readFileSync("./data/schema.gql", "utf8");
 
 const app = express();
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers, context: async({req}) => {
+	//Get Token
+	const token = req.headers['authorization'];
+	console.log(token)
+} });
 
 server.applyMiddleware({ app });
 

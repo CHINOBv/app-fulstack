@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-import Error from '../Alertas/Error';
+import Error from '../alertas/Error';
 
 import { Mutation } from 'react-apollo';
+import { AUTH_USER } from '../../mutations'
 
 const initialState = {
     usuario : '',
@@ -29,8 +30,13 @@ class Login extends Component {
          this.setState({...initialState});
     }
 
-    iniciarSesion = (e, usuarioAutenticar) => {
+    iniciarSesion = (e, autenticarUsuario) => {
         e.preventDefault();
+
+        autenticarUsuario().then( async ({ data }) => {
+			localStorage.setItem( 'token', data.autenticarUsuario.token);
+			this.limpiarState();
+        });
      
      }
 
@@ -39,7 +45,7 @@ class Login extends Component {
 
         const noValido = !usuario || !password;
 
-        console.log(noValido);
+        //console.log(noValido);
         return noValido;
      }
     render() { 
@@ -52,15 +58,15 @@ class Login extends Component {
                 <div className="row  justify-content-center">
 
                     <Mutation 
-                        mutation={  }
+                        mutation={ AUTH_USER }
                         variables={{usuario, password}}    
                     >
-                    {( usuarioAutenticar, {loading, error, data}) => {
+                    {( autenticarUsuario, {loading, error, data}) => {
 
                         return (
                             
                             <form 
-                                onSubmit={ e => this.iniciarSesion(e, usuarioAutenticar) } 
+                                onSubmit={ e => this.iniciarSesion(e, autenticarUsuario) } 
                                 className="col-md-8"
                             >
 
