@@ -16,6 +16,9 @@ import EditProducto from './productos/EditProducto.jsx';
 import NuevoPedido from './pedidos/NuevoPedido.jsx';
 import PedidosClient from './pedidos/PedidosClient.jsx';
 
+//Panel
+import Panel from './panel/Panel.jsx'
+
 class Routes extends Component {
   render() {
     return (
@@ -35,6 +38,8 @@ class Routes extends Component {
               
               <Route exact path= "/pedidos/nuevo/:id" component={NuevoPedido} />
               <Route exact path= "/pedidos/:id" component={PedidosClient} />
+
+              <Route exact path= "/panel" component={Panel} />
             </Switch>
           </div>
         </Fragment>

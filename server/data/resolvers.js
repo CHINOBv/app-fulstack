@@ -55,6 +55,42 @@ export const resolvers = {
           else resolve(pedido)
         })
       } )
+    },
+    topClientes : (root) => {
+      return new Promise(( resolve, object ) => {
+        Pedidos.aggregate([
+            {
+                $match: {
+                    estado: "COMPLETADO"
+                }
+            },
+            {
+                $group: {
+                    _id: "$cliente",
+                    total:{ $sum: "$total" }
+                }
+            },
+            {
+                $lookup:{
+                    from: "clientes",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "cliente"
+                }
+            },
+            {
+                $sort: {
+                    total: -1 
+                }
+            },
+            {
+                $limit: 10
+            }
+        ], (error, res) => {
+          if(error) rejects(error);
+          else resolve(res);
+        })
+      });
     }
   },
 

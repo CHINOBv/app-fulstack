@@ -43,6 +43,10 @@ type PedidoProducto {
     id: ID
     cantidad: Int
 }
+type ClienteTotal {
+    total: Float
+    cliente:[Cliente]
+}
 
 type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
@@ -54,6 +58,8 @@ type Query {
     totalProductos: String
     #Pedidos 
     getPedidos(cliente: String): [Pedido]
+    #Graficas
+    topClientes: [ClienteTotal]
 }
 
 type Producto{

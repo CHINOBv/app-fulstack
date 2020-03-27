@@ -8,7 +8,7 @@ import Exito from '../alertas/Exito.jsx';
 import Spiner from '../layaut/Spiner.jsx';
 
 class Clientes extends Component {
-  limite = 3;
+  limite = 10;
 
   state = {
     paginador: {

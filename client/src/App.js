@@ -9,7 +9,7 @@ const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache({
     addTypename:false
-  }),
+  },{connectToDevTools: true}),
   onError: ({ networkError, graphQLErrors }) => {
     console.log("Errors gql: ", graphQLErrors);
     console.log("Errors NetWork: ", networkError);

@@ -9,7 +9,7 @@ import Exito from '../alertas/Exito.jsx';
 import Paginador from '../layaut/Paginador.jsx';
 
 class Productos extends Component {
-	limite=3;
+	limite=10;
 
 	state={
 		alerta: {
