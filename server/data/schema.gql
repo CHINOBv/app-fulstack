@@ -52,7 +52,9 @@ type Token {
     token: String!
 }
 type Usuario {
+    id: ID
     usuario: String
+    nombre: String
 }
 
 type Query {
@@ -125,6 +127,7 @@ type Mutation {
     #Pedido
     nuevoPedido(input: PedidoInput): Pedido
     actualizarEstado(input:PedidoInput): String
-    crearUsuario(usuario: String!, password: String!) : String
+    #User
+    crearUsuario(usuario: String!,nombre: String!, password: String!, rol: String!) : String
     autenticarUsuario(usuario: String!, password: String!): Token
 }

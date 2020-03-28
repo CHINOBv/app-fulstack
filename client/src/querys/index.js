@@ -87,7 +87,9 @@ export const USUARIO_ACTUAL = gql`
   
   query getUsuario {
     getUsuario{
+      id
       usuario
+      nombre
     }
   }
 

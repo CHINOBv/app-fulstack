@@ -109,8 +109,9 @@ export const resolvers = {
       if (!usuarioActual) {
         return null;
       }
-      console.log(usuarioActual)
+      //console.log(usuarioActual)
         //Get User of Req Verified
+      //busca el Usuario con el Token para traer la informacion
       const usuario = Usuarios.findOne({ usuario: usuarioActual.usuario});
 
       return usuario;
@@ -244,14 +245,16 @@ export const resolvers = {
         });
       });
     },
-    crearUsuario: async (root, { usuario, password }) => {
+    crearUsuario: async (root, { usuario, nombre, password, rol }) => {
       const exsitUser = await Usuarios.findOne({ usuario });
       if (exsitUser) {
         throw new Error('El usuario ya existe');
       }
       const nuevoUsuario = await new Usuarios({
         usuario,
-        password
+        nombre,
+        password,
+        rol
       }).save();
       return "Creado Correctamente";
     },

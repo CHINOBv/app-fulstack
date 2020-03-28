@@ -9,7 +9,8 @@ import { AUTH_USER } from '../../mutations'
 
 const initialState = {
     usuario : '',
-    password: ''
+    password: '',
+    error: ''
 }
 
 class Login extends Component {
@@ -42,8 +43,8 @@ class Login extends Component {
 
             setTimeout( () => {
                 this.props.history.push('/panel');
-            }, 3000)
-        });
+            }, 2000)
+        }).catch(error => error = '')
      
      }
 

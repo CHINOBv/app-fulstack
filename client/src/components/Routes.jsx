@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 //Clientes
 import Header from "./layaut/Header.jsx";
@@ -24,13 +24,19 @@ import Registro from './auth/Registro.jsx'
 import Login from './auth/Login.jsx';
 
 class Routes extends Component {
+  
   render() {
-    //console.log(this.props.session)
+
+  const { getUsuario } = this.props.session;
+  //console.log(this.props.session)
+  const mensaje = (getUsuario) ? ` Bienvenido: ${getUsuario.nombre} ` : <Redirect to="/login" />;
+    
     return (
       <Router>
         <Fragment>
-          <Header />
+          <Header session={this.props.session}/>
           <div className="container">
+          <p className="text-right">{mensaje}</p>
             <Switch>
 
               <Route exact path="/clientes" component={Clientes} />

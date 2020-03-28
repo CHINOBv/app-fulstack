@@ -9,6 +9,8 @@ const initState = {
 	usuario: '',
 	password: '',
 	repetirPassword: '',
+	nombre: '',
+	rol: '',
 	error: ''
 }
 
@@ -33,9 +35,9 @@ export class Registro extends React.Component {
 	}
 
 	validForm = () => {
-		const { usuario, password, repetirPassword } = this.state;
+		const { usuario, password, repetirPassword, nombre, rol } = this.state;
 
-		const noValid = !usuario || !password || password !== repetirPassword;
+		const noValid = !usuario || !password || !nombre || !rol || password !== repetirPassword;
 		return noValid;
 	}
 	crearRegistro = (e, crearUsuario) => {
@@ -54,7 +56,7 @@ export class Registro extends React.Component {
 	}
 
 	render() {
-		const { usuario, password, repetirPassword, error } = this.state;
+		const { usuario, password, repetirPassword, nombre, rol, error } = this.state;
 		const mensaje = error ? <Error error={error} /> : '';
 		return (
 			<Fragment>
@@ -62,13 +64,13 @@ export class Registro extends React.Component {
 				<div className="row  justify-content-center">
 					<Mutation
 						mutation={CREAR_USUARIO}
-						variables={{ usuario, password }}
+						variables={{ usuario, password, nombre, rol }}
 					>
 						{(crearUsuario, { loading, error, data }) => {
 							return (
 
 								<form
-									className="col-md-8"
+									className="col-md-8 mb-5"
 									onSubmit={e => this.crearRegistro(e, crearUsuario)}
 								>
 									{mensaje}
@@ -82,30 +84,61 @@ export class Registro extends React.Component {
 											onChange={this.actualizarState}
 											value={usuario}
 										/>
+										<small className="form-text text-muted">
+											(Sin espacios y sin caracteres Especiales)
+										</small>
 									</div>
 									<div className="form-group">
-										<label>Password</label>
+										<label>Nombre</label>
 										<input
-											type="password"
-											name="password"
+											type="text"
+											name="nombre"
 											className="form-control"
-											placeholder="Password"
+											placeholder="Nombre Completo"
 											onChange={this.actualizarState}
-											value={password}
+											value={nombre}
 										/>
+										<small className="form-text text-muted">
+											(Agreguar el Nombre y Apellidos Completos)
+										</small>
+									</div>
+									<div className="form-row">
+										<div className="form-group col-md-6">
+											<label>Password</label>
+											<input
+												type="password"
+												name="password"
+												className="form-control"
+												placeholder="Password"
+												onChange={this.actualizarState}
+												value={password}
+											/>
+										</div>
+										<div className="form-group col-md-6">
+											<label>Repetir Password</label>
+											<input
+												type="password"
+												name="repetirPassword"
+												className="form-control"
+												placeholder="Repetir Password"
+												onChange={this.actualizarState}
+												value={repetirPassword}
+											/>
 									</div>
 									<div className="form-group">
-										<label>Repetir Password</label>
-										<input
-											type="password"
-											name="repetirPassword"
+										<label> Rol: </label>
+										<select
 											className="form-control"
-											placeholder="Repetir Password"
+											value={rol}
+											name="rol"
 											onChange={this.actualizarState}
-											value={repetirPassword}
-										/>
+											>
+											<option value="">Elegir...</option>
+											<option value="ADMINISTRADOR">ADMINISTRADOR</option>
+											<option value="VENDEDOR">VENDEDOR</option>
+										</select>
 									</div>
-
+									</div>
 									<button
 										disabled={loading || this.validForm()}
 										type="submit"
