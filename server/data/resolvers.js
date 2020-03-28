@@ -104,6 +104,16 @@ export const resolvers = {
           else resolve(res);
         })
       });
+    },
+    getUsuario: ( root, args, {usuarioActual} ) => {
+      if (!usuarioActual) {
+        return null;
+      }
+      console.log(usuarioActual)
+        //Get User of Req Verified
+      const usuario = Usuarios.findOne({ usuario: usuarioActual.usuario});
+
+      return usuario;
     }
   },
 

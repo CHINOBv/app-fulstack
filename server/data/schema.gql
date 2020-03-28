@@ -51,6 +51,9 @@ type ClienteTotal {
 type Token {
     token: String!
 }
+type Usuario {
+    usuario: String
+}
 
 type Query {
     getClientes(limite: Int, offset: Int): [Cliente]
@@ -64,6 +67,8 @@ type Query {
     getPedidos(cliente: String): [Pedido]
     #Graficas
     topClientes: [ClienteTotal]
+    #Auth
+    getUsuario: Usuario
 }
 
 type Producto{

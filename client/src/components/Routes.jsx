@@ -25,6 +25,7 @@ import Login from './auth/Login.jsx';
 
 class Routes extends Component {
   render() {
+    //console.log(this.props.session)
     return (
       <Router>
         <Fragment>
@@ -46,7 +47,7 @@ class Routes extends Component {
               <Route exact path="/panel" component={Panel} />
 
               <Route exact path="/registro" component={Registro} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" render={ () => <Login refetch={this.props.refetch}/> } />
 
             </Switch>
           </div>
