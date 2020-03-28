@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-
+import {withRouter} from 'react-router-dom'
 import { NUEVO_CLIENTE } from "../../mutations/index.js";
 import { Mutation } from "react-apollo";
 
@@ -44,6 +44,9 @@ class NuevoCliente extends Component {
   };
 
   render() {
+
+    const idVendedor = this.props.session.getUsuario.id;
+
     const { error } = this.state;
     const res = error ? (
       <p className="alert alert-danger p-3 text-center">
@@ -85,7 +88,8 @@ class NuevoCliente extends Component {
                     empresa,
                     edad: Number(edad),
                     emails,
-                    tipo
+                    tipo,
+                    vendedor: idVendedor
                   };
 
                   if (
@@ -240,4 +244,4 @@ class NuevoCliente extends Component {
   }
 }
 
-export default NuevoCliente;
+export default withRouter(NuevoCliente);

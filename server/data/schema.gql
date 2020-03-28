@@ -55,10 +55,11 @@ type Usuario {
     id: ID
     usuario: String
     nombre: String
+    rol: String
 }
 
 type Query {
-    getClientes(limite: Int, offset: Int): [Cliente]
+    getClientes(limite: Int, offset: Int, vendedor: String): [Cliente]
     getCliente(id: ID) : Cliente
     totalClientes: String
     # Producto Querys
@@ -93,6 +94,7 @@ input ClienteInput{
     edad: Int
     tipo: TipoCliente
     pedidos: [PedidoInput]
+    vendedor: ID
 }
 
 """Producto Input"""

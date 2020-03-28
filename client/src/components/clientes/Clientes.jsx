@@ -43,12 +43,28 @@ class Clientes extends Component {
     const { alerta: { mostrar, mensaje } } = this.state;
     const alerta = (mostrar) ? <Exito mensaje= { mensaje }/> : '';
 
+    //Get ID of Vendedor para mostrar sus Clientes
+
+    //console.log(this.props.session.getUsuario)
+    const {rol} = this.props.session.getUsuario;
+    let id;
+    
+    if(rol === "VENDEDOR"){
+      id = this.props.session.getUsuario.id;
+    }else{
+      id = "";
+    }
+    
+
     return (
       //Consulting DB
       <Query
         query={CLIENTES_QUERY}
         pollInterval={500}
-        variables={{ limite: this.limite, offset: this.state.paginador.offset }}
+        variables={{
+         limite: this.limite, 
+         offset: this.state.paginador.offset, 
+         vendedor: id}}
       >
         {({ loading, error, data, startPolling, stopPolling }) => {
           //Consulting
