@@ -37,4 +37,4 @@ const server = new ApolloServer({ typeDefs, resolvers, context: async({req}) => 
 
 server.applyMiddleware({ app });
 
-app.listen({ port: 4000 }, () => console.log(`Server Runing ${server.graphqlPath}`));
+app.listen({ port: 4002 }, () => console.log(`Server Runing ${server.graphqlPath}`));
