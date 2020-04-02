@@ -217,6 +217,7 @@ export const resolvers = {
         total: input.total,
         fecha: new Date(),
         cliente: input.cliente,
+        vendedor: input.vendedor,
         estado: "PENDIENTE"
       });
       nuevoPedido.id = nuevoPedido._id;

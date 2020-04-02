@@ -44,8 +44,15 @@ class NuevoCliente extends Component {
   };
 
   render() {
+    
+    let idVendedor;
+    const {getUsuario} = this.props.session;
 
-    const idVendedor = this.props.session.getUsuario.id;
+    if(!getUsuario){
+      this.props.history.push('/login')
+    }else{
+      idVendedor = getUsuario.id;
+    }
 
     const { error } = this.state;
     const res = error ? (

@@ -36,6 +36,7 @@ type Pedido {
     total: Int
     fecha: String
     cliente: ID
+    vendedor: ID
     estado: EstadoPedido
 }
 

@@ -42,6 +42,7 @@ const predidosSchema = new mongoose.Schema({
   fecha: Date,
   //ObjectID se usa para Relacionar una DB con otra
   cliente: mongoose.Types.ObjectId,
+  vendedor: mongoose.Types.ObjectId,
   estado: String
 
 });

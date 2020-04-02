@@ -52,7 +52,7 @@ class Routes extends Component {
 
               <Route exact path="/panel" component={Panel} />
 
-              <Route exact path="/registro" component={Registro} />
+              <Route exact path="/registro" render={() => <Registro session={this.props.session} />} />
               <Route exact path="/login" render={ () => <Login refetch={this.props.refetch}/> } />
 
             </Switch>

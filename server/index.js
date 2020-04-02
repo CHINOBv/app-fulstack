@@ -8,6 +8,8 @@ const typeDefs = fs.readFileSync("./data/schema.gql", "utf8");
 
 const app = express();
 
+const port = process.env.PORT || 4000;
+
 const server = new ApolloServer({ typeDefs, resolvers, context: async({req}) => {
 	//Get Token desde el Client
 	const token = req.headers['authorization'];
@@ -37,4 +39,4 @@ const server = new ApolloServer({ typeDefs, resolvers, context: async({req}) => 
 
 server.applyMiddleware({ app });
 
-app.listen({ port: 4002 }, () => console.log(`Server Runing ${server.graphqlPath}`));
+app.listen({ port }, () => console.log(`Server Runing ${server.graphqlPath}`));

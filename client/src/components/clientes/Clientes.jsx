@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { Query, Mutation } from "react-apollo";
 import { CLIENTES_QUERY } from "../../querys/index.js";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { ELIMINAR_CLIENTE } from "../../mutations/index.js";
 import Paginador from "../layaut/Paginador.jsx";
 import Exito from '../alertas/Exito.jsx';
@@ -46,7 +46,16 @@ class Clientes extends Component {
     //Get ID of Vendedor para mostrar sus Clientes
 
     //console.log(this.props.session.getUsuario)
-    const {rol} = this.props.session.getUsuario;
+    const {getUsuario} = this.props.session;
+    
+    let rol;
+
+    if(!getUsuario){
+      this.props.history.push('/login')
+    }else{
+      rol = this.props.session.getUsuario.rol;
+    }
+    //const {rol} =     ;
     let id;
     
     if(rol === "VENDEDOR"){
@@ -160,4 +169,4 @@ class Clientes extends Component {
   }
 }
 
-export default Clientes;
+export default withRouter(Clientes);

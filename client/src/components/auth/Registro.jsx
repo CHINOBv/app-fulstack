@@ -56,6 +56,13 @@ export class Registro extends React.Component {
 	}
 
 	render() {
+		
+		//Valida que sea Admin, si no Lo manda a la lista de clientes
+		const {getUsuario} = this.props.session;
+
+		if (getUsuario.rol !== "ADMINISTRADOR") {
+			this.props.history.push("/clientes")
+		}
 		const { usuario, password, repetirPassword, nombre, rol, error } = this.state;
 		const mensaje = error ? <Error error={error} /> : '';
 		return (
