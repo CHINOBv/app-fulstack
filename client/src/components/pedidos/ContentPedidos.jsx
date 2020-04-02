@@ -106,6 +106,7 @@ export class ContentPedidos extends Component {
 					total={this.state.total}
 					idCliente={this.props.id}
 					refetch={this.props.refetch}
+					idVendedor={this.props.idVendedor}
 				/>
 			</Fragment>
 		)

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Query } from 'react-apollo';
 import { PRODUCTOS_QUERY } from '../../querys'
+import { withRouter } from 'react-router-dom'
 
 import DatosCliente from './DatosCliente.jsx';
 import ContentPedidos from './ContentPedidos.jsx';
@@ -10,6 +11,8 @@ import Spiner from '../layaut/Spiner.jsx';
 export class NuevoPedido extends Component {
 	render() {
 		const { id } = this.props.match.params;
+		const idVendedor = this.props.session.getUsuario.id;
+		//console.log(idVendedor)
 		return (
 			<Fragment>
 				<h1 className="text-center mb-5">Nuevo Pedido</h1>
@@ -32,6 +35,7 @@ export class NuevoPedido extends Component {
 										refetch={refetch}
 										datas={data}
 										id={id}
+										idVendedor={idVendedor}
 									/>
 								)
 							}}
@@ -43,4 +47,4 @@ export class NuevoPedido extends Component {
 	}
 }
 
-export default NuevoPedido
+export default withRouter(NuevoPedido);

@@ -47,7 +47,7 @@ class Routes extends Component {
               <Route exact path="/productos/nuevo" component={NuevoProducto} />
               <Route exact path="/productos/editar/:id" component={EditProducto} />
 
-              <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido} />
+              <Route exact path="/pedidos/nuevo/:id" render={ () => <NuevoPedido session={this.props.session}/> } />
               <Route exact path="/pedidos/:id" component={PedidosClient} />
 
               <Route exact path="/panel" component={Panel} />

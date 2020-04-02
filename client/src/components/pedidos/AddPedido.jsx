@@ -9,6 +9,7 @@ const validPedido = (props) => {
 }
 
 function AddPedido(props) {
+	console.log(props.idVendedor)
 	return (
 		<Mutation
 			mutation={NUEVO_PEDIDO}
@@ -24,7 +25,8 @@ function AddPedido(props) {
 						const input = {
 							pedido: productosInput,
 							total: props.total,
-							cliente: props.idCliente
+							cliente: props.idCliente,
+							vendedor: props.idVendedor
 						};
 
 						nuevoPedido({
