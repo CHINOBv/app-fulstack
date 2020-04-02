@@ -47,11 +47,11 @@ class NuevoCliente extends Component {
     
     let idVendedor;
     const {getUsuario} = this.props.session;
-
-    if(!getUsuario){
-      this.props.history.push('/login')
-    }else{
+    
+    try{
       idVendedor = getUsuario.id;
+    }catch(error){
+      this.props.history.push('/login')
     }
 
     const { error } = this.state;

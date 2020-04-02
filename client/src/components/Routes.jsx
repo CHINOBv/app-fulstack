@@ -29,8 +29,9 @@ class Routes extends Component {
 
   const { getUsuario } = this.props.session;
   //console.log(this.props.session)
-  const mensaje = (getUsuario) ? ` Bienvenido: ${getUsuario.nombre} ` : <Redirect to="/login" />;
     
+  const mensaje = (getUsuario) ? ` Bienvenido: ${getUsuario.nombre} ` : <Redirect to="/login" />;
+
     return (
       <Router>
         <Fragment>
@@ -39,7 +40,7 @@ class Routes extends Component {
           <p className="text-right">{mensaje}</p>
             <Switch>
 
-              <Route exact path="/clientes" render={ () => <Clientes refetch={this.props.refetch} session={this.props.session}/> } />
+              <Route exact path="/clientes" render={ () =>  <Clientes refetch={this.props.refetch} session={this.props.session}/> } />
               <Route exact path="/clientes/nuevo" render={ () => <NuevoCliente refetch={this.props.refetch} session={this.props.session}/> } />
               <Route exact path="/clientes/editar/:id" component={EditCliente} />
 

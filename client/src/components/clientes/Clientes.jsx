@@ -46,25 +46,22 @@ class Clientes extends Component {
     //Get ID of Vendedor para mostrar sus Clientes
 
     //console.log(this.props.session.getUsuario)
-    const {getUsuario} = this.props.session;
-    
     let rol;
+    try{
 
-    if(!getUsuario){
-      this.props.history.push('/login')
-    }else{
       rol = this.props.session.getUsuario.rol;
-    }
-    //const {rol} =     ;
-    let id;
-    
-    if(rol === "VENDEDOR"){
-      id = this.props.session.getUsuario.id;
-    }else{
-      id = "";
-    }
-    
 
+    }catch(error){
+      this.props.history.push('/login');
+    }
+
+      let id;
+      
+      if(rol === "VENDEDOR"){
+        id = this.props.session.getUsuario.id;
+      }else{
+        id = "";
+      }
     return (
       //Consulting DB
       <Query

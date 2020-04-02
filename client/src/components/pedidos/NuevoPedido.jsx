@@ -11,7 +11,12 @@ import Spiner from '../layaut/Spiner.jsx';
 export class NuevoPedido extends Component {
 	render() {
 		const { id } = this.props.match.params;
-		const idVendedor = this.props.session.getUsuario.id;
+		let idVendedor;
+		try{
+			idVendedor = this.props.session.getUsuario.id;
+		}catch(error){
+			this.props.history.push('/login')
+		}
 		//console.log(idVendedor)
 		return (
 			<Fragment>

@@ -35,6 +35,7 @@ class Login extends Component {
         e.preventDefault();
 
         autenticarUsuario().then( async ({ data }) => {
+            //Guarda el Token en LS
 			localStorage.setItem( 'token', data.autenticarUsuario.token);
             
             await this.props.refetch();
@@ -43,7 +44,7 @@ class Login extends Component {
 
             setTimeout( () => {
                 this.props.history.push('/panel');
-            }, 2000)
+            }, 1000)
         }).catch(error => error = '')
      
      }
