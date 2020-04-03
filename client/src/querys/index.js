@@ -95,3 +95,16 @@ export const USUARIO_ACTUAL = gql`
   }
 
 `;
+
+export const TOP_VENDEDORES = gql`
+  query topVendedores {
+    topVendedores{
+      total
+      vendedor{
+        nombre
+        usuario
+        rol
+      }
+    }
+  }
+`;

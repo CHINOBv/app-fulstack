@@ -120,6 +120,42 @@ export const resolvers = {
       const usuario = Usuarios.findOne({ usuario: usuarioActual.usuario});
 
       return usuario;
+    },
+    topVendedores: (root) => {
+      return new Promise((resolve, object) => {
+        Pedidos.aggregate([
+          {
+            $match: {
+              estado: "COMPLETADO"
+            }
+          },
+          {
+            $group: {
+              _id: "$vendedor",
+              total: { $sum: "$total" }
+            }
+          },
+          {
+            $lookup: {
+              from: "usuarios",
+              localField: "_id",
+              foreignField: "_id",
+              as: "vendedor"
+            }
+          },
+          {
+            $sort: {
+              total: -1
+            }
+          },
+          {
+            $limit: 10
+          }
+        ], (error, res) => {
+          if (error) rejects(error);
+          else resolve(res);
+        })
+      });
     }
   },
 
